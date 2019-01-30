@@ -16,7 +16,7 @@ public class Conversions {
             System.exit(1);
         }
         switch (p.charAt(0)) {
-            case 'c': return "do"+ottava;
+            case 'c': return "do"+ ottava;
             case 'd': return "re"+ottava;
             case 'e': return "mi"+ottava;
             case 'f': return "fa"+ottava;
@@ -32,7 +32,8 @@ public class Conversions {
         String p = nota.toLowerCase();
         int n = 0;
         String[] parts;
-        for (int i = 0; i < notes.length; i++) {
+        int i = 0;
+        while (i < notes.length) {
             if (notes[i].length() > 1) {
                 parts = notes[i].split("/");
                 if (parts[0].equals(p) || parts[1].equals(p))
@@ -41,6 +42,7 @@ public class Conversions {
             else
                 if (notes[i].equals(p))
                     n = i;
+            i++;
         }
         int midi = 12*ottava + 12 + n;
         return 440.0f * (float)Math.pow(2.0f, (midi - 69f) / 12.0f);
@@ -59,10 +61,6 @@ public class Conversions {
     }
     
     public String conversionToHelm(String nota, int ottava) {
-        /*if (args.length != 2) {
-            System.out.println("Numero di argomenti errato, uso: Helmholtz nota ottava");
-            System.exit(1);
-        }*/
         String p = nota.toLowerCase();
         if (!p.equals("c") && !p.equals("d") && !p.equals("e") && !p.equals("f")
                 && !p.equals("g") && !p.equals("a") && !p.equals("b")) {
@@ -70,13 +68,7 @@ public class Conversions {
                     + "). La nota deve essere espressa in notazione anglosassone");
             System.exit(1);
         }
-        /*int octave = 0;
-        try {
-            octave = Integer.parseInt(args[1]);
-        } catch (NumberFormatException e) {
-            System.out.println("Numero dell'ottava errato (" + p + ")");
-            System.exit(1);
-        }*/
+        
         String result = nota + ottava;
         if (ottava >= 3) {
             result += p;

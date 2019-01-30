@@ -13,19 +13,61 @@ public class Note {
 
 //////////////////////Constructors//////////////////////////////////////////////
     public Note(String note, int octave) {
-        this.octave = octave;
-        this.note = note;
-        c = new Conversions();
+        if (checkNote(note, octave)) {
+            this.octave = octave;
+            this.note = note;
+            c = new Conversions();
+        }
+        else
+            System.out.println("Input non valido");
     }
     
     public Note(String note) {
-        this.note = note;
+        this.octave = 4;
+        if (checkNote(note, octave)) {
+            c = new Conversions();
+            this.note = note;
+        }
+        else
+            System.out.println("Input non valido");
     }
 
     public Note(int pitchMidi) {
-        this.pitchMidi = pitchMidi;
+        if (pitchMidi >=0 && pitchMidi <= 127) {
+            this.pitchMidi = pitchMidi;
+            c = new Conversions();
+        }
+        else
+            System.out.println("Input non valido");
     }
 ////////////////////////////////////////////////////////////////////////////////
+    public boolean checkNote(String nota, int octave) {
+        String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
+        String[] parts;
+        String p = nota.toLowerCase();
+        boolean b = false;
+   
+        if (octave >= 0 && octave <=10) {
+            int i = 0;
+            while (i < notes.length) {
+                if (notes[i].length() > 1) {
+                    parts = notes[i].split("/");
+                    if (parts[0].equals(p) || parts[1].equals(p))
+                        b = true;
+                }
+                else {
+                    if (notes[i].equals(p))
+                        b = true;
+                    else
+                        b = false;
+                }
+                i++;
+            }
+        }
+        else
+            b = false;
+        return b;
+    }
     
     public int getPitchMidi() {
         return pitchMidi;
@@ -50,7 +92,8 @@ public class Note {
     public void setNote(String note) {
         this.note = note;
     } 
-    
+
+////////////////////////////////////////////////////////////////////////////////
     public String getHelmholtz() {
         return c.conversionToHelm(note, octave);
     }
