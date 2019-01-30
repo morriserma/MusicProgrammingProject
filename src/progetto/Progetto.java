@@ -20,7 +20,7 @@ public class Progetto {
         for (int i = 0; i < melody.size(); i++) {
             System.out.println("Nota:" + melody.get(i).getNote());
             System.out.println("Ottava:" + melody.get(i).getOctave());
-            //System.out.println(melody.get(i).getHelmholtz());
+            System.out.println(melody.get(i).getHelmholtz());
             System.out.println("Scientifica: " + melody.get(i).getScientificNotation());
             System.out.println("Neolatina: " + melody.get(i).getNeolatinNotation());
             System.out.println("Frequenza: " + melody.get(i).getFreq());

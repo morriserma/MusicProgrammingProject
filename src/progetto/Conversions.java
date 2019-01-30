@@ -5,6 +5,7 @@ package progetto;
  * @author Morris
  */
 public class Conversions {
+    
  
     public String conversionToNeolatin(String nota, int ottava) {
         String p = nota.toLowerCase();
@@ -62,14 +63,15 @@ public class Conversions {
     
     public String conversionToHelm(String nota, int ottava) {
         String p = nota.toLowerCase();
-        if (!p.equals("c") && !p.equals("d") && !p.equals("e") && !p.equals("f")
-                && !p.equals("g") && !p.equals("a") && !p.equals("b")) {
+        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
+                && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
+                && p.charAt(0) != 'b') {
             System.out.println("Nome della nota errato (" + p 
                     + "). La nota deve essere espressa in notazione anglosassone");
             System.exit(1);
         }
         
-        String result = nota + ottava;
+        String result = "";
         if (ottava >= 3) {
             result += p;
             for (int i = 3; i < ottava; i++)

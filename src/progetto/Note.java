@@ -68,6 +68,7 @@ public class Note {
             b = false;
         return b;
     }
+////////////////////////////////////////////////////////////////////////////////
     
     public int getPitchMidi() {
         return pitchMidi;
