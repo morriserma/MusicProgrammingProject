@@ -63,4 +63,8 @@ public class Note {
         return c.conversionToNeolatin(note, octave);
     }
     
+    public float getFreq() {
+        
+        return c.conversionToFrequency(note, octave);
+    }
 }

@@ -27,11 +27,24 @@ public class Conversions {
         return null;
     }
     
-    /*public float conversionToFrequency(String nota, int ottava) {
-        
-        int midi = 12*ottava + ;
+    public float conversionToFrequency(String nota, int ottava) {
+        String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
+        String p = nota.toLowerCase();
+        int n = 0;
+        String[] parts;
+        for (int i = 0; i < notes.length; i++) {
+            if (notes[i].length() > 1) {
+                parts = notes[i].split("/");
+                if (parts[0].equals(p) || parts[1].equals(p))
+                    n = i;
+            }
+            else
+                if (notes[i].equals(p))
+                    n = i;
+        }
+        int midi = 12*ottava + 12 + n;
         return 440.0f * (float)Math.pow(2.0f, (midi - 69f) / 12.0f);
-    }*/
+    }
     
     public String conversionToScientificNotation(String nota, int ottava){
         String p = nota.toLowerCase();
