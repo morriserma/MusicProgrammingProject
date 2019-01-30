@@ -13,7 +13,7 @@ public class Progetto {
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayList<Note> melody = new ArrayList<Note>(); 
-        Note n1 = new Note("C", 4);
+        Note n1 = new Note("C#", 4);
         Note n2 = new Note("db", 8);
         melody.add(n1);
         melody.add(n2);
@@ -25,7 +25,7 @@ public class Progetto {
             System.out.println("Neolatina: " + melody.get(i).getNeolatinNotation());
             System.out.println("Frequenza: " + melody.get(i).getFreq());
             
-            
+            System.out.println("//////////////////////////////////////");
         }
     }
     

@@ -15,7 +15,7 @@ public class Note {
     public Note(String note, int octave) {
         if (checkNote(note, octave)) {
             this.octave = octave;
-            this.note = note;
+            this.note = note.toLowerCase();
             c = new Conversions();
         }
         else
@@ -26,7 +26,7 @@ public class Note {
         this.octave = 4;
         if (checkNote(note, octave)) {
             c = new Conversions();
-            this.note = note;
+            this.note = note.toLowerCase();
         }
         else
             System.out.println("Input non valido");
@@ -41,15 +41,15 @@ public class Note {
             System.out.println("Input non valido");
     }
 ////////////////////////////////////////////////////////////////////////////////
-    public boolean checkNote(String nota, int octave) {
+    public boolean checkNote(String note, int octave) {
         String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
         String[] parts;
-        String p = nota.toLowerCase();
+        String p = note.toLowerCase();
         boolean b = false;
    
         if (octave >= 0 && octave <=10) {
             int i = 0;
-            while (i < notes.length) {
+            while (b == false && i < notes.length) {
                 if (notes[i].length() > 1) {
                     parts = notes[i].split("/");
                     if (parts[0].equals(p) || parts[1].equals(p))

@@ -16,13 +16,13 @@ public class Conversions {
             System.exit(1);
         }
         switch (p.charAt(0)) {
-            case 'c': return "do"+ ottava;
-            case 'd': return "re"+ottava;
-            case 'e': return "mi"+ottava;
-            case 'f': return "fa"+ottava;
-            case 'g': return "sol"+ottava;
-            case 'a': return "la"+ottava;
-            case 'b': return "si"+ottava;
+            case 'c': return p.replaceAll("c", "Do") + ottava;
+            case 'd': return p.replaceAll("d", "Re") + ottava;
+            case 'e': return p.replaceAll("e", "Mi") + ottava;
+            case 'f': return p.replaceAll("f", "Fa") + ottava;
+            case 'g': return p.replaceAll("g", "Sol") + ottava;
+            case 'a': return p.replaceAll("a", "La") + ottava;
+            case 'b': return p.replaceAll("b", "Si") + ottava;
         }
         return null;
     }
