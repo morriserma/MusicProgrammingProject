@@ -28,25 +28,8 @@ public class Conversions {
         return null;
     }
     
-    public float conversionToFrequency(String nota, int ottava) {
-        String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
-        String p = nota.toLowerCase();
-        int n = 0;
-        String[] parts;
-        int i = 0;
-        while (i < notes.length) {
-            if (notes[i].length() > 1) {
-                parts = notes[i].split("/");
-                if (parts[0].equals(p) || parts[1].equals(p))
-                    n = i;
-            }
-            else
-                if (notes[i].equals(p))
-                    n = i;
-            i++;
-        }
-        int midi = 12*ottava + 12 + n;
-        return 440.0f * (float)Math.pow(2.0f, (midi - 69f) / 12.0f);
+    public float conversionToFrequency(String nota, int ottava) {        
+        return 440.0f * (float)Math.pow(2.0f, (convertsionToMIDI(nota, ottava) - 69f) / 12.0f);
     }
     
     public String conversionToScientificNotation(String nota, int ottava){
@@ -59,6 +42,25 @@ public class Conversions {
             System.exit(1);
         }
         return nota + ottava;
+    }
+    
+    public int convertsionToMIDI(String nota, int ottava) {
+        String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
+        int n = 0;
+        String[] parts;
+        int i = 0;
+        while (i < notes.length) {
+            if (notes[i].length() > 1) {
+                parts = notes[i].split("/");
+                if (parts[0].equals(nota) || parts[1].equals(nota))
+                    n = i;
+            }
+            else
+                if (notes[i].equals(nota))
+                    n = i;
+            i++;
+        }
+        return 12*ottava + 12 + n;
     }
     
     public String conversionToHelm(String nota, int ottava) {

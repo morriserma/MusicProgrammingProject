@@ -23,6 +23,7 @@ public class Progetto {
             System.out.println(melody.get(i).getHelmholtz());
             System.out.println("Scientifica: " + melody.get(i).getScientificNotation());
             System.out.println("Neolatina: " + melody.get(i).getNeolatinNotation());
+            System.out.println("MIDI: " + melody.get(i).getMIDI());
             System.out.println("Frequenza: " + melody.get(i).getFreq());
             
             System.out.println("//////////////////////////////////////");

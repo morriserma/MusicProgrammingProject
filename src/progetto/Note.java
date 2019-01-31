@@ -108,7 +108,10 @@ public class Note {
     }
     
     public float getFreq() {
-        
         return c.conversionToFrequency(note, octave);
+    }
+    
+    public int getMIDI() {
+        return c.convertsionToMIDI(note, octave);
     }
 }
