@@ -1,9 +1,5 @@
 package progetto;
 
-/**
- *
- * @author Morris
- */
 public class Conversions {
     
  
