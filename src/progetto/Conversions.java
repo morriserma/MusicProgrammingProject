@@ -59,6 +59,13 @@ public class Conversions {
         return 12*ottava + 12 + n;
     }
     
+    public static String conversionMidiToPitchOctave(int midiPitch) {
+        String[] notes = {"c", "c#", "d", "eb", "e", "f", "f#", "g", "g#", "a", "bb", "b"};
+        String pitch = notes[midiPitch % 12];
+        int octave = midiPitch / 12 - 1;
+        return pitch + "/" + octave;
+    }
+    
     public static String conversionToHelm(String nota, int ottava) {
         String p = nota.toLowerCase();
         if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 

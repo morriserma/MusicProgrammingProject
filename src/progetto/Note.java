@@ -2,9 +2,7 @@ package progetto;
 
 public class Note {
     int octave;
-    String note;
-    int pitchMidi;
-    
+    String note;   
 
 //////////////////////Constructors//////////////////////////////////////////////
     public Note(String note, int octave) {
@@ -25,16 +23,17 @@ public class Note {
             System.out.println("Input non valido");
     }
 
-    public Note(int pitchMidi) {
-        if (pitchMidi >=0 && pitchMidi <= 127) {
-            this.pitchMidi = pitchMidi;
+    public Note(int midiPitch) {
+        if (midiPitch >=0 && midiPitch <= 127) {
+            getPitchOctaveFromMidi(midiPitch);
         }
         else
             System.out.println("Input non valido");
     }
 ////////////////////////////////////////////////////////////////////////////////
-    public boolean checkNote(String note, int octave) {
-        String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
+    private boolean checkNote(String note, int octave) {
+        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
+            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
         String[] parts;
         String p = note.toLowerCase();
         boolean b = false;
@@ -60,15 +59,14 @@ public class Note {
             b = false;
         return b;
     }
-////////////////////////////////////////////////////////////////////////////////
     
-    public int getPitchMidi() {
-        return pitchMidi;
+    private void getPitchOctaveFromMidi(int midiPitch) {
+        String pitchOctave = Conversions.conversionMidiToPitchOctave(midiPitch);
+        String[] parts = pitchOctave.split("/");
+        setOctave(Integer.parseInt(parts[1]));
+        setNote(parts[0]);
     }
-
-    public void setPitchMidi(int pitchMidi) {
-        this.pitchMidi = pitchMidi;
-    }
+////////////////////////////////////////////////////////////////////////////////
     
     public int getOctave() {
         return octave;
@@ -103,7 +101,7 @@ public class Note {
         return Conversions.conversionToFrequency(note, octave);
     }
     
-    public int getMIDI() {
+    public int getMIDIPitch() {
         return Conversions.convertsionToMIDI(note, octave);
     }
 }
