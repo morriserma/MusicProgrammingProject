@@ -7,7 +7,7 @@ package progetto;
 public class Conversions {
     
  
-    public String conversionToNeolatin(String nota, int ottava) {
+    public static String conversionToNeolatin(String nota, int ottava) {
         String p = nota.toLowerCase();
         if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
                 && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
@@ -28,11 +28,11 @@ public class Conversions {
         return null;
     }
     
-    public float conversionToFrequency(String nota, int ottava) {        
+    public static float conversionToFrequency(String nota, int ottava) {        
         return 440.0f * (float)Math.pow(2.0f, (convertsionToMIDI(nota, ottava) - 69f) / 12.0f);
     }
     
-    public String conversionToScientificNotation(String nota, int ottava){
+    public static String conversionToScientificNotation(String nota, int ottava){
         String p = nota.toLowerCase();
         if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
                 && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
@@ -44,7 +44,7 @@ public class Conversions {
         return nota + ottava;
     }
     
-    public int convertsionToMIDI(String nota, int ottava) {
+    public static int convertsionToMIDI(String nota, int ottava) {
         String[] notes = {"c", "c#/db", "d", "d#/eb", "e", "f", "f#/gb", "g", "g#/ab", "a", "a#/bb", "b"};
         int n = 0;
         String[] parts;
@@ -63,7 +63,7 @@ public class Conversions {
         return 12*ottava + 12 + n;
     }
     
-    public String conversionToHelm(String nota, int ottava) {
+    public static String conversionToHelm(String nota, int ottava) {
         String p = nota.toLowerCase();
         if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
                 && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'

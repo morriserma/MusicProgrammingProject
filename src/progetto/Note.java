@@ -8,7 +8,6 @@ public class Note {
     int octave;
     String note;
     int pitchMidi;
-    Conversions c;
     
 
 //////////////////////Constructors//////////////////////////////////////////////
@@ -16,7 +15,6 @@ public class Note {
         if (checkNote(note, octave)) {
             this.octave = octave;
             this.note = note.toLowerCase();
-            c = new Conversions();
         }
         else
             System.out.println("Input non valido");
@@ -25,7 +23,6 @@ public class Note {
     public Note(String note) {
         this.octave = 4;
         if (checkNote(note, octave)) {
-            c = new Conversions();
             this.note = note.toLowerCase();
         }
         else
@@ -35,7 +32,6 @@ public class Note {
     public Note(int pitchMidi) {
         if (pitchMidi >=0 && pitchMidi <= 127) {
             this.pitchMidi = pitchMidi;
-            c = new Conversions();
         }
         else
             System.out.println("Input non valido");
@@ -96,22 +92,22 @@ public class Note {
 
 ////////////////////////////////////////////////////////////////////////////////
     public String getHelmholtz() {
-        return c.conversionToHelm(note, octave);
+        return Conversions.conversionToHelm(note, octave);
     }
     
     public String getScientificNotation() {
-        return c.conversionToScientificNotation(note, octave);
+        return Conversions.conversionToScientificNotation(note, octave);
     }
     
     public String getNeolatinNotation() {
-        return c.conversionToNeolatin(note, octave);
+        return Conversions.conversionToNeolatin(note, octave);
     }
     
     public float getFreq() {
-        return c.conversionToFrequency(note, octave);
+        return Conversions.conversionToFrequency(note, octave);
     }
     
     public int getMIDI() {
-        return c.convertsionToMIDI(note, octave);
+        return Conversions.convertsionToMIDI(note, octave);
     }
 }
