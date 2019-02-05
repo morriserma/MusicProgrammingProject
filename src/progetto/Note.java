@@ -24,11 +24,38 @@ public class Note {
     }
 
     public Note(int midiPitch) {
+        String pitchOctave = "";
+        String[] parts;
         if (midiPitch >=0 && midiPitch <= 127) {
-            getPitchOctaveFromMidi(midiPitch);
+            pitchOctave = ConversionsFrom.conversionFromMidiPitch(midiPitch);
         }
         else
             System.out.println("Input non valido");
+        
+        parts = pitchOctave.split("/");
+        if (checkNote(parts[0], Integer.parseInt(parts[1]))) {
+            this.octave = Integer.parseInt(parts[1]);
+            this.note = parts[0];
+        }
+    }
+    
+    public Note(String note, String notation) {
+        String noteLow = note.toLowerCase();
+        String notationLow = notation.toLowerCase();
+        String[] parts;
+        String pitchOctave = "";
+        if (notationLow.equals("neolatina"))
+            pitchOctave = ConversionsFrom.conversionFromNeolatin(noteLow);
+        else if (notationLow.equals("anglosassone"))
+            pitchOctave = ConversionsFrom.conversionFromAnglo(noteLow);
+        else if (notationLow.equals("helmholtz"))
+            System.out.println("");
+        
+        parts = pitchOctave.split("/");
+        if (checkNote(parts[0], Integer.parseInt(parts[1]))) {
+            this.octave = Integer.parseInt(parts[1]);
+            this.note = parts[0];
+        }
     }
 ////////////////////////////////////////////////////////////////////////////////
     private boolean checkNote(String note, int octave) {
@@ -60,12 +87,6 @@ public class Note {
         return b;
     }
     
-    private void getPitchOctaveFromMidi(int midiPitch) {
-        String pitchOctave = Conversions.conversionMidiToPitchOctave(midiPitch);
-        String[] parts = pitchOctave.split("/");
-        setOctave(Integer.parseInt(parts[1]));
-        setNote(parts[0]);
-    }
 ////////////////////////////////////////////////////////////////////////////////
     
     public int getOctave() {
@@ -86,22 +107,22 @@ public class Note {
 
 ////////////////////////////////////////////////////////////////////////////////
     public String getHelmholtz() {
-        return Conversions.conversionToHelm(note, octave);
+        return ConversionsTo.conversionToHelm(note, octave);
     }
     
     public String getScientificNotation() {
-        return Conversions.conversionToScientificNotation(note, octave);
+        return ConversionsTo.conversionToScientificNotation(note, octave);
     }
     
     public String getNeolatinNotation() {
-        return Conversions.conversionToNeolatin(note, octave);
+        return ConversionsTo.conversionToNeolatin(note, octave);
     }
     
     public float getFreq() {
-        return Conversions.conversionToFrequency(note, octave);
+        return ConversionsTo.conversionToFrequency(note, octave);
     }
     
     public int getMIDIPitch() {
-        return Conversions.convertsionToMIDI(note, octave);
+        return ConversionsTo.convertsionToMIDI(note, octave);
     }
 }

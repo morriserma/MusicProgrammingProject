@@ -24,6 +24,13 @@ public class Progetto {
             
             System.out.println("//////////////////////////////////////");
         }
+        
+        Note n4 = new Note("Dox4", "neolAtina");
+        m.add(n4);
+        System.out.println("ConversioneInInput: " + m.getNoteAt(3).getNote() + "" + m.getNoteAt(3).getOctave());
+        Note n5 = new Note("Cx4", "AnGlosassone");
+        m.add(n5);
+        System.out.println("ConversioneInInput: " + m.getNoteAt(4).getNote() + "" + m.getNoteAt(4).getOctave());
     }
     
 }

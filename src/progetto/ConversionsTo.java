@@ -1,8 +1,7 @@
 package progetto;
 
-public class Conversions {
-    
- 
+public class ConversionsTo {
+     
     public static String conversionToNeolatin(String nota, int ottava) {
         String p = nota.toLowerCase();
         if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
