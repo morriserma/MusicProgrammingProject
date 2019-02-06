@@ -6,7 +6,7 @@ public class Note {
 
 //////////////////////Constructors//////////////////////////////////////////////
     public Note(String note, int octave) {
-        if (checkNote(note, octave)) {
+        if (ConversionsFrom.checkNoteValidity(note, octave)) {
             this.octave = octave;
             this.note = note.toLowerCase();
         }
@@ -16,7 +16,7 @@ public class Note {
     
     public Note(String note) {
         this.octave = 4;
-        if (checkNote(note, octave)) {
+        if (ConversionsFrom.checkNoteValidity(note, octave)) {
             this.note = note.toLowerCase();
         }
         else
@@ -33,7 +33,7 @@ public class Note {
             System.out.println("Input non valido");
         
         parts = pitchOctave.split("/");
-        if (checkNote(parts[0], Integer.parseInt(parts[1]))) {
+        if (ConversionsFrom.checkNoteValidity(parts[0], Integer.parseInt(parts[1]))) {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
         }
@@ -52,46 +52,17 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromAnglo(noteLow);
         else if (notationLow.equals("helmholtz"))
             pitchOctave = ConversionsFrom.conversionFromHelmholtz(note);
+        else if (notationLow.equals("frequency"))
+            pitchOctave = ConversionsFrom.conversionFromFrequency(note);
         
         parts = pitchOctave.split("/");
-        if (checkNote(parts[0], Integer.parseInt(parts[1]))) {
+        if (ConversionsFrom.checkNoteValidity(parts[0], Integer.parseInt(parts[1]))) {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
         }
         else
             throw new IllegalArgumentException();
     }
-////////////////////////////////////////////////////////////////////////////////
-    private boolean checkNote(String note, int octave) {
-        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
-            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
-        String[] parts;
-        String p = note.toLowerCase();
-        boolean b = false;
-   
-        if (octave >= 0 && octave <=10) {
-            int i = 0;
-            while (b == false && i < notes.length) {
-                if (notes[i].length() > 1) {
-                    parts = notes[i].split("/");
-                    if (parts[0].equals(p) || parts[1].equals(p))
-                        b = true;
-                }
-                else {
-                    if (notes[i].equals(p))
-                        b = true;
-                    else
-                        b = false;
-                }
-                i++;
-            }
-        }
-        else
-            b = false;
-        return b;
-    }
-    
-////////////////////////////////////////////////////////////////////////////////
     
     public int getOctave() {
         return octave;

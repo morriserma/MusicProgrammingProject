@@ -6,8 +6,8 @@ public class Progetto {
     public static void main(String[] args) {
         // TODO code application logic here
         Melody m = new Melody(); 
-        Note n1 = new Note("C#", 4);
-        Note n2 = new Note("db", 8);
+        Note n1 = new Note("C", 0);
+        Note n2 = new Note("b", 10);
         Note n3 = new Note(103);
         m.add(n1);
         m.add(n2);
@@ -35,6 +35,10 @@ public class Progetto {
         Note n6 = new Note("E,,", "helmholtz");
         m.add(n6);
         System.out.println("ConversioneInInput: " + m.getNoteAt(5).getNote() + "" + m.getNoteAt(5).getOctave());
+        
+        Note n7 = new Note("739,99", "frequency");
+        m.add(n7);
+        System.out.println("ConversioneInInput: " + m.getNoteAt(6).getNote() + "" + m.getNoteAt(6).getOctave());
     }
     
 }

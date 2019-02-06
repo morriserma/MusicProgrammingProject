@@ -67,13 +67,24 @@ public class ConversionsFrom {
                 octave = 4 + i; 
         }
         
-        if(checkInput(pitch, octave))
+        if(checkNoteValidity(pitch, octave))
             return pitch + "/" + octave;
         else
             throw new IllegalArgumentException();
     }
     
-    private static boolean checkInput(String pitch, int octave) {
+    public static String conversionFromFrequency(String nota) {   
+        int midiPitch;
+        double freq = Double.parseDouble(nota.replace(",","."));
+        if(freq > 16.351597 && freq < 31608.527)
+            midiPitch = (int) (69 + 12*(Math.log(freq / 440)) / Math.log(2));
+        else
+             throw new IllegalArgumentException();
+        
+        return  conversionFromMidiPitch(midiPitch);
+    }
+    
+    public static boolean checkNoteValidity(String pitch, int octave) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
         String[] parts;
