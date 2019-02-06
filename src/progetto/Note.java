@@ -11,7 +11,7 @@ public class Note {
             this.note = note.toLowerCase();
         }
         else
-            System.out.println("Input non valido");
+            throw new IllegalArgumentException();
     }
     
     public Note(String note) {
@@ -20,7 +20,7 @@ public class Note {
             this.note = note.toLowerCase();
         }
         else
-            System.out.println("Input non valido");
+            throw new IllegalArgumentException();
     }
 
     public Note(int midiPitch) {
@@ -37,6 +37,8 @@ public class Note {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
         }
+        else
+            throw new IllegalArgumentException();
     }
     
     public Note(String note, String notation) {
@@ -49,13 +51,15 @@ public class Note {
         else if (notationLow.equals("anglosassone"))
             pitchOctave = ConversionsFrom.conversionFromAnglo(noteLow);
         else if (notationLow.equals("helmholtz"))
-            System.out.println("");
+            pitchOctave = ConversionsFrom.conversionFromHelmholtz(note);
         
         parts = pitchOctave.split("/");
         if (checkNote(parts[0], Integer.parseInt(parts[1]))) {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
         }
+        else
+            throw new IllegalArgumentException();
     }
 ////////////////////////////////////////////////////////////////////////////////
     private boolean checkNote(String note, int octave) {

@@ -35,4 +35,70 @@ public class ConversionsFrom {
         String[] parts = pitchOctave.split("/");
         return parts[0] + "/" + parts[1];
     }
+    
+    public static String conversionFromHelmholtz(String note) {
+        String pitch;
+        int octave;
+        
+        if(Character.isUpperCase(note.charAt(0))) {
+            int i = 0;
+            for(int j = 0; j < note.length(); j++) {
+                if(note.charAt(j) == ',')
+                    i++;
+            }
+
+            pitch = note.substring(0, note.length() - i);
+            if(i == 0)
+                octave = 3;
+            else
+                octave = 3 - i; 
+        }
+        else {
+            int i = 0;
+            for(int j = 0; j < note.length(); j++) {
+                if(note.charAt(j) == '\'')
+                    i++;
+            }
+            
+            pitch = note.substring(0, note.length() - i);
+            if(i == 0)
+                octave = 4;
+            else
+                octave = 4 + i; 
+        }
+        
+        if(checkInput(pitch, octave))
+            return pitch + "/" + octave;
+        else
+            throw new IllegalArgumentException();
+    }
+    
+    private static boolean checkInput(String pitch, int octave) {
+        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
+            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
+        String[] parts;
+        String p = pitch.toLowerCase();
+        boolean b = false;
+   
+        if (octave >= 0 && octave <=10) {
+            int i = 0;
+            while (b == false && i < notes.length) {
+                if (notes[i].length() > 1) {
+                    parts = notes[i].split("/");
+                    if (parts[0].equals(p) || parts[1].equals(p))
+                        b = true;
+                }
+                else {
+                    if (notes[i].equals(p))
+                        b = true;
+                    else
+                        b = false;
+                }
+                i++;
+            }
+        }
+        else
+            b = false;
+        return b;
+    }
 }

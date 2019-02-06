@@ -31,6 +31,10 @@ public class Progetto {
         Note n5 = new Note("Cx4", "AnGlosassone");
         m.add(n5);
         System.out.println("ConversioneInInput: " + m.getNoteAt(4).getNote() + "" + m.getNoteAt(4).getOctave());
+        
+        Note n6 = new Note("E,,", "helmholtz");
+        m.add(n6);
+        System.out.println("ConversioneInInput: " + m.getNoteAt(5).getNote() + "" + m.getNoteAt(5).getOctave());
     }
     
 }
