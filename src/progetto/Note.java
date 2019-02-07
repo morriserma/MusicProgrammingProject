@@ -100,4 +100,8 @@ public class Note {
     public int getMIDIPitch() {
         return ConversionsTo.convertsionToMIDI(note, octave);
     }
+    
+    public short getPitchClass() {
+        return ConversionsTo.conversionToPitchClass(note, octave);
+    }
 }

@@ -87,4 +87,23 @@ public class ConversionsTo {
         }
         return result;
     }
+    
+     public static short conversionToPitchClass(String nota, int ottava) {
+        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
+            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
+        
+        short i = 0;
+        boolean check = false;
+        while(i < notes.length && check == false) {
+            String[] oneNote = notes[i].split("/");
+            int j = 0;
+            while(j < oneNote.length && check == false) {
+                if(oneNote[j].equals(nota))
+                    check = true;
+                j++;
+            }
+            i++;
+        }
+        return i;
+     }
 }

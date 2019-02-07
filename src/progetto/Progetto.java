@@ -6,8 +6,8 @@ public class Progetto {
     public static void main(String[] args) {
         // TODO code application logic here
         Melody m = new Melody(); 
-        Note n1 = new Note("C", 1);
-        Note n2 = new Note("b", 4);
+        Note n1 = new Note("b", 1);
+        Note n2 = new Note("C", 4);
         Note n3 = new Note(103);
         m.add(n1);
         m.add(n2);
@@ -42,6 +42,8 @@ public class Progetto {
         
         System.out.println("La nota più alta della melodia è: " + m.getHighestNote().getScientificNotation());
         System.out.println("La nota più alta della melodia è: " + m.getLowestNote().getScientificNotation());
+        System.out.println("Pitch Class: " + n7.getPitchClass());
+        System.out.println("PCI: " + Manipulations.pitchClassInterval(n1, n2));
     }
     
 }
