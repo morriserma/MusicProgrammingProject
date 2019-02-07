@@ -6,8 +6,8 @@ public class Progetto {
     public static void main(String[] args) {
         // TODO code application logic here
         Melody m = new Melody(); 
-        Note n1 = new Note("C", 0);
-        Note n2 = new Note("b", 10);
+        Note n1 = new Note("C", 1);
+        Note n2 = new Note("b", 4);
         Note n3 = new Note(103);
         m.add(n1);
         m.add(n2);
@@ -39,6 +39,9 @@ public class Progetto {
         Note n7 = new Note("739,99", "frequency");
         m.add(n7);
         System.out.println("ConversioneInInput: " + m.getNoteAt(6).getNote() + "" + m.getNoteAt(6).getOctave());
+        
+        System.out.println("La nota più alta della melodia è: " + m.getHighestNote().getScientificNotation());
+        System.out.println("La nota più alta della melodia è: " + m.getLowestNote().getScientificNotation());
     }
     
 }

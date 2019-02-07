@@ -28,4 +28,12 @@ public class Melody {
     public void resetMelody() {
         melody.clear();
     }
+    
+    public Note getLowestNote() {
+        return Manipulations.lowestPitchOfMelody(this);
+    }
+    
+    public Note getHighestNote() {
+        return Manipulations.highestPitchOfMelody(this);
+    }
 }

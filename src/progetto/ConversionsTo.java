@@ -4,13 +4,13 @@ public class ConversionsTo {
      
     public static String conversionToNeolatin(String nota, int ottava) {
         String p = nota.toLowerCase();
-        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
+        /*if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
                 && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
                 && p.charAt(0) != 'b') {
             
             System.out.println("Nome della nota errato (" + p + "). La nota deve essere espressa in notazione anglosassone");
             System.exit(1);
-        }
+        }*/
         switch (p.charAt(0)) {
             case 'c': return p.replaceAll("c", "Do") + ottava;
             case 'd': return p.replaceAll("d", "Re") + ottava;
@@ -29,13 +29,13 @@ public class ConversionsTo {
     
     public static String conversionToScientificNotation(String nota, int ottava){
         String p = nota.toLowerCase();
-        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
-                && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
-                && p.charAt(0) != 'b') {
-            
-            System.out.println("Nome della nota errato (" + p + "). La nota deve essere espressa in notazione anglosassone");
-            System.exit(1);
-        }
+//        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
+//                && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
+//                && p.charAt(0) != 'b') {
+//            
+//            System.out.println("Nome della nota errato (" + p + "). La nota deve essere espressa in notazione anglosassone");
+//            System.exit(1);
+//        }
         return nota + ottava;
     }
     
@@ -67,13 +67,13 @@ public class ConversionsTo {
     
     public static String conversionToHelm(String nota, int ottava) {
         String p = nota.toLowerCase();
-        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
-                && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
-                && p.charAt(0) != 'b') {
-            System.out.println("Nome della nota errato (" + p 
-                    + "). La nota deve essere espressa in notazione anglosassone");
-            System.exit(1);
-        }
+//        if (p.charAt(0) != 'c' && p.charAt(0) != 'd' && p.charAt(0) != 'e' 
+//                && p.charAt(0) != 'f' && p.charAt(0) != 'g' && p.charAt(0) != 'a'
+//                && p.charAt(0) != 'b') {
+//            System.out.println("Nome della nota errato (" + p 
+//                    + "). La nota deve essere espressa in notazione anglosassone");
+//            System.exit(1);
+//        }
         
         String result = "";
         if (ottava >= 3) {
