@@ -6,8 +6,8 @@ public class Progetto {
     public static void main(String[] args) {
         // TODO code application logic here
         Melody m = new Melody(); 
-        Note n1 = new Note("b", 1);
-        Note n2 = new Note("C", 4);
+        Note n1 = new Note("g", 1);
+        Note n2 = new Note("D", 4);
         Note n3 = new Note(103);
         m.add(n1);
         m.add(n2);
@@ -43,7 +43,22 @@ public class Progetto {
         System.out.println("La nota più alta della melodia è: " + m.getHighestNote().getScientificNotation());
         System.out.println("La nota più alta della melodia è: " + m.getLowestNote().getScientificNotation());
         System.out.println("Pitch Class: " + n7.getPitchClass());
-        System.out.println("PCI: " + Manipulations.pitchClassInterval(n1, n2));
+        System.out.println("PCI: " + Manipulations.pitchClassInterval(n1, n2) + " --> PCI':" 
+                + Manipulations.pciName(Manipulations.pitchClassInterval(n1, n2)));
+        System.out.println("PCI: " + Manipulations.pitchClassIntervalInversion(n1, n2) + " --> PCI':" 
+                + Manipulations.pciName(Manipulations.pitchClassIntervalInversion(n1, n2)));
+        System.out.println("PCI: " + Manipulations.pitchClassInterval(n1, n2) + " --> CI:" 
+                + Manipulations.ciInterval(n1, n2) + " --> " 
+                + Manipulations.pciName(Manipulations.ciInterval(n1, n2)));
+        
+        Note n8 = new Note("10", "Pc");
+        System.out.println("PCI 10 --> " + n8.getNote() + n8.getOctave());
+        m.melodyTrasposition((short) (1));
+        for(int i = 0; i < m.getLenght(); i++) {
+            System.out.println("Melodia trasposta: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
+        }
+        
     }
+    
     
 }

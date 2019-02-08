@@ -54,6 +54,8 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromHelmholtz(note);
         else if (notationLow.equals("frequency"))
             pitchOctave = ConversionsFrom.conversionFromFrequency(note);
+        else if (notationLow.equals("pc"))
+            pitchOctave = ConversionsFrom.conversionFromPC(noteLow);
         
         parts = pitchOctave.split("/");
         if (ConversionsFrom.checkNoteValidity(parts[0], Integer.parseInt(parts[1]))) {
@@ -102,6 +104,6 @@ public class Note {
     }
     
     public short getPitchClass() {
-        return ConversionsTo.conversionToPitchClass(note, octave);
+        return ConversionsTo.conversionToPitchClass(note);
     }
 }

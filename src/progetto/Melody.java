@@ -17,6 +17,10 @@ public class Melody {
         melody.remove(n);
     }
     
+    public void editNote(Note newNote, int notePos) {
+       
+    }
+    
     public int getLenght() {
         return melody.size();
     }
@@ -35,5 +39,12 @@ public class Melody {
     
     public Note getHighestNote() {
         return Manipulations.highestPitchOfMelody(this);
+    }
+    
+    public void melodyTrasposition(short pcTrasposition) {
+        for(int i = 0; i < this.getLenght(); i++) {
+            melody.set(i, Manipulations.pcNoteTrasposition(melody.get(i), pcTrasposition));
+        }
+        
     }
 }

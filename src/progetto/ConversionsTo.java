@@ -88,7 +88,7 @@ public class ConversionsTo {
         return result;
     }
     
-     public static short conversionToPitchClass(String nota, int ottava) {
+     public static short conversionToPitchClass(String nota) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
         

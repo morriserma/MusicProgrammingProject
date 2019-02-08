@@ -77,4 +77,64 @@ public class Manipulations {
         
         return pci;
     }
+    
+    public static short pitchClassIntervalInversion(Note n1, Note n2) {
+        short pci = pitchClassInterval(n1, n2);
+        short invertedPCI = (short) ((12 - pci) % 12);
+        return invertedPCI;
+    }
+       
+    public static String pciName(short pci) {
+        switch(pci){
+            case 0: return "Unisono giusto/Ottava giusta";
+            case 1: return "Seconda minore";
+            case 2: return "Seconda maggiore";
+            case 3: return "Terza minore";
+            case 4: return "terza maggiore";
+            case 5: return "Quarta giusta";
+            case 6: return "Quarta eccedente/Quinta diminuita";
+            case 7: return "Quinta giusta";
+            case 8: return "Sesta minore";
+            case 9: return "Sesta maggiore";
+            case 10: return "Settima minore";
+            case 11: return "Settima maggiore";
+        }
+
+        return null;
+    }
+    
+    public static short ciInterval(Note n1, Note n2) {
+        short pci = pitchClassInterval(n1, n2);
+        if(pci <= 6)
+            return pci;
+        else
+            return (short) (12 - pci);
+    }
+    
+    public static Note pcNoteTrasposition(Note n, int pcTrasposition) {
+        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
+            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
+        
+        String pitch1 = n.getNote();
+        short i = 0;
+        boolean check = false;
+        while(i < notes.length && check == false) {
+            String[] oneNote = notes[i].split("/");
+            int j = 0;
+            while(j < oneNote.length && check == false) {
+                if(oneNote[j].equals(pitch1))
+                    check = true;
+                j++;
+            }
+            if(check == false)
+                i++;
+        }
+        short notePC = i;
+        
+        short trasposition = (short) ((notePC + pcTrasposition) % 12);
+        String traspPitch = ConversionsFrom.conversionFromPC("" + trasposition);
+        n.setNote(traspPitch.split("/")[0]);
+        return n;
+    }
+    
 }
