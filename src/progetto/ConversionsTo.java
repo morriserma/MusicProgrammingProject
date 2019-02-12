@@ -121,4 +121,9 @@ public class ConversionsTo {
             i++;
         return i;
      }
+     
+     public static short converstionToCNC(Note n) {
+         short cnc = (short) ((n.getOctave() * 7) + n.getNameClass());
+         return cnc;
+     }
 }

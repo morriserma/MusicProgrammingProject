@@ -67,6 +67,8 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromCPC(noteLow);
         else if (notationLow.equals("nc"))
             pitchOctave = ConversionsFrom.conversionFromNC(noteLow);
+        else if (notationLow.equals("cnc"))
+            pitchOctave = ConversionsFrom.conversionFromCNC(noteLow);
         
         parts = pitchOctave.split("/");
         int octaveParam = 0;
@@ -131,5 +133,9 @@ public class Note {
     
     public short getNameClass() {
         return ConversionsTo.conversionToNC(this);
+    }
+    
+    public short getContinuousNameCode() {
+        return ConversionsTo.converstionToCNC(this);
     }
 }

@@ -184,4 +184,18 @@ public class ConversionsFrom {
             throw new IllegalArgumentException("Indice " + index + " non valido");
         return pitch + "/" + 4;
     }
+    
+    public static String conversionFromCNC(String nota) {
+        int notaInt;
+        try {
+           notaInt = Integer.parseInt(nota);            
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore CNC errato (" + nota + ")");
+        }
+        int octave = notaInt / 7;
+        int nc = notaInt % 7;
+        
+        return conversionFromNC(""+nc).split("/")[0] + "/" + octave;
+    }
 }

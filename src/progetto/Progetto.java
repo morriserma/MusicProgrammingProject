@@ -74,7 +74,7 @@ public class Progetto {
         System.out.println("CPCI tra 63 e 38: " + Manipulations.continuousPitchClassInterval(n12, n13));
         
         Note n14 = new Note("0", "nc");
-        Note n15 = new Note("6", "nc");
+        Note n15 = new Note("5", "nc");
         //System.out.println("5 NC --> " + n14.getNote() + "" +n14.getOctave());
         System.out.println(n12.getNote() + "" + n12.getOctave() + " NC --> " + n12.getNameClass());
         
@@ -90,9 +90,9 @@ public class Progetto {
         for(int i = 0; i < m.getLenght(); i++) {
             System.out.println("Melodia trasposta con NCI: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
         }
+        System.out.println("CNC di " + n15.getNote() + "" + n15.getOctave() + " --> " + n15.getContinuousNameCode());
         
+        Note n16 = new Note("28", "cnc");
+        System.out.println("CNC --> " + n16.getNote() + "" + n16.getOctave());
     }
-    
-       
-    
 }
