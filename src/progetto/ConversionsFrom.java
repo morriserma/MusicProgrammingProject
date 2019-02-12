@@ -4,7 +4,14 @@ public class ConversionsFrom {
     public static String conversionFromNeolatin(String note) {
         String pitch = note.split("(?<=\\D)(?=\\d)")[0];
         String alteration = "";
-        int octave = Integer.parseInt(note.split("(?<=\\D)(?=\\d)")[1]);
+        int octave = 0;
+        
+        try {
+            octave = Integer.parseInt(note.split("(?<=\\D)(?=\\d)")[1]);
+        } catch (NumberFormatException e) {
+            //System.out.println("Numero dell'ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+            throw new IllegalArgumentException("Valore ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+        }
         
         if(pitch.length() > 2) {
             for (int i = 2; i < pitch.length(); i++) {
@@ -26,7 +33,13 @@ public class ConversionsFrom {
     
     public static String conversionFromAnglo(String note) {
         String pitch = note.split("(?<=\\D)(?=\\d)")[0];
-        int octave = Integer.parseInt(note.split("(?<=\\D)(?=\\d)")[1]);
+        int octave = 0;
+        try {
+            octave = Integer.parseInt(note.split("(?<=\\D)(?=\\d)")[1]);
+        } catch (NumberFormatException e) {
+            //System.out.println("Numero dell'ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+            throw new IllegalArgumentException("Valore ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+        }
         return pitch + "/" + octave;
     }
     
@@ -75,7 +88,13 @@ public class ConversionsFrom {
     
     public static String conversionFromFrequency(String nota) {   
         int midiPitch;
-        double freq = Double.parseDouble(nota.replace(",","."));
+        double freq = 0;
+        try {
+            freq = Double.parseDouble(nota.replace(",","."));
+        } catch (NumberFormatException e) {
+            System.out.println("Valore della frequenza errato (" + nota.replace(",",".") + ")");
+            System.exit(1);
+        }
         if(freq > 16.351597 && freq < 31608.527)
             midiPitch = (int) (69 + 12*(Math.log(freq / 440)) / Math.log(2));
         else
@@ -117,7 +136,52 @@ public class ConversionsFrom {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
         
-        String pitch = notes[Integer.parseInt(nota)].split("/")[0];
-        return pitch + "/4";
+        String pitch = "";
+        int index = 0;
+        try {
+            index = Integer.parseInt(nota);
+            
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore Pitch Class errato (" + nota + ")");
+        }
+        if(index >= 0 && index <= 11)
+            pitch = notes[index].split("/")[0];
+        else
+            throw new IllegalArgumentException("Indice non valido");
+        return pitch + "/" + 4;
+    }
+    
+    public static String conversionFromCPC(String nota) {
+        int octave = 0;
+        short pc = 0;
+        try {
+            octave = Integer.parseInt(nota) / 12;
+            pc = (short) (Integer.parseInt(nota) % 12);
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore Continuous Pitch Class errato (" + nota + ")");
+        }
+        
+        return conversionFromPC("" + pc).split("/")[0] + "/" + octave;
+    }
+    
+    public static String conversionFromNC(String nota) {
+        String[] notes = {"c", "d", "e", "f", "g", "a", "b"};
+        
+        String pitch = "";
+        int index = 0;
+        try {
+            index = Integer.parseInt(nota);
+            
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore Pitch Class errato (" + nota + ")");
+        }
+        if(index >= 0 && index <= 6)
+            pitch = notes[index];
+        else
+            throw new IllegalArgumentException("Indice " + index + " non valido");
+        return pitch + "/" + 4;
     }
 }

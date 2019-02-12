@@ -30,9 +30,16 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromMidiPitch(midiPitch);
         }
         else
-            System.out.println("Input non valido");
+            throw new IllegalArgumentException();
         
         parts = pitchOctave.split("/");
+        int octaveParam = 0;
+        try {
+            octaveParam = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("Errore di costruzione della nota!\nNumero dell'ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+            System.exit(1);
+        }
         if (ConversionsFrom.checkNoteValidity(parts[0], Integer.parseInt(parts[1]))) {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
@@ -56,9 +63,20 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromFrequency(note);
         else if (notationLow.equals("pc"))
             pitchOctave = ConversionsFrom.conversionFromPC(noteLow);
+        else if (notationLow.equals("cpc"))
+            pitchOctave = ConversionsFrom.conversionFromCPC(noteLow);
+        else if (notationLow.equals("nc"))
+            pitchOctave = ConversionsFrom.conversionFromNC(noteLow);
         
         parts = pitchOctave.split("/");
-        if (ConversionsFrom.checkNoteValidity(parts[0], Integer.parseInt(parts[1]))) {
+        int octaveParam = 0;
+        try {
+            octaveParam = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("Errore di costruzione della nota!\nNumero dell'ottava errato (" + note.split("(?<=\\D)(?=\\d)")[1] + ")");
+            System.exit(1);
+        }
+        if (ConversionsFrom.checkNoteValidity(parts[0], octaveParam)) {
             this.octave = Integer.parseInt(parts[1]);
             this.note = parts[0];
         }
@@ -105,5 +123,13 @@ public class Note {
     
     public short getPitchClass() {
         return ConversionsTo.conversionToPitchClass(note);
+    }
+    
+    public int getContinuousPitchCode() {
+        return ConversionsTo.conversionToCPC(note, octave);
+    }
+    
+    public short getNameClass() {
+        return ConversionsTo.conversionToNC(note);
     }
 }

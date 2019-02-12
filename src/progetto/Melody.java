@@ -41,10 +41,15 @@ public class Melody {
         return Manipulations.highestPitchOfMelody(this);
     }
     
-    public void melodyTrasposition(short pcTrasposition) {
+    public void melodyPCITrasposition(short pcTrasposition) {
         for(int i = 0; i < this.getLenght(); i++) {
-            melody.set(i, Manipulations.pcNoteTrasposition(melody.get(i), pcTrasposition));
+            melody.set(i, Manipulations.pcNoteTrasposition(melody.get(i), pcTrasposition));    
         }
-        
+    }
+    
+    public void melodyCPCITrasposition(int pcTrasposition) {
+        for(int i = 0; i < this.getLenght(); i++) {
+            melody.set(i, Manipulations.cpcNoteTrasposition(melody.get(i), pcTrasposition));
+        } 
     }
 }

@@ -12,7 +12,14 @@ public class Manipulations {
             }
             String pitchOctave = ConversionsFrom.conversionFromMidiPitch(minMidiPitch);
             String pitch = pitchOctave.split("/")[0];
-            int octave = Integer.parseInt(pitchOctave.split("/")[1]);
+            int octave = 0;
+            try {
+                octave = Integer.parseInt(pitchOctave.split("/")[1]);
+            } catch (NumberFormatException e) {
+                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+                throw new IllegalArgumentException("Valore ottava errato (" + pitchOctave.split("/")[1] + ")");
+            }
+            
             Note n = new Note(pitch, octave);
             return n;
         }
@@ -84,7 +91,7 @@ public class Manipulations {
         return invertedPCI;
     }
        
-    public static String pciName(short pci) {
+    public static String pitchClassIntervalName(short pci) {
         switch(pci){
             case 0: return "Unisono giusto/Ottava giusta";
             case 1: return "Seconda minore";
@@ -98,12 +105,11 @@ public class Manipulations {
             case 9: return "Sesta maggiore";
             case 10: return "Settima minore";
             case 11: return "Settima maggiore";
-        }
-
-        return null;
+            default: throw new IllegalArgumentException();
+            }
     }
     
-    public static short ciInterval(Note n1, Note n2) {
+    public static short intervalClass(Note n1, Note n2) {
         short pci = pitchClassInterval(n1, n2);
         if(pci <= 6)
             return pci;
@@ -111,30 +117,57 @@ public class Manipulations {
             return (short) (12 - pci);
     }
     
-    public static Note pcNoteTrasposition(Note n, int pcTrasposition) {
-        String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
-            "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
-        
-        String pitch1 = n.getNote();
-        short i = 0;
-        boolean check = false;
-        while(i < notes.length && check == false) {
-            String[] oneNote = notes[i].split("/");
-            int j = 0;
-            while(j < oneNote.length && check == false) {
-                if(oneNote[j].equals(pitch1))
-                    check = true;
-                j++;
+    public static Note pcNoteTrasposition(Note n, int pcInterval) {
+        if(pcInterval > 0 && pcInterval <= 12) {
+            String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
+                "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
+
+            String pitch1 = n.getNote();
+            short i = 0;
+            boolean check = false;
+            while(i < notes.length && check == false) {
+                String[] oneNote = notes[i].split("/");
+                int j = 0;
+                while(j < oneNote.length && check == false) {
+                    if(oneNote[j].equals(pitch1))
+                        check = true;
+                    j++;
+                }
+                if(check == false)
+                    i++;
             }
-            if(check == false)
-                i++;
+            short notePC = i;
+
+            short trasposition = (short) ((notePC + pcInterval) % 12);
+            String traspPitch = ConversionsFrom.conversionFromPC("" + trasposition);
+            n.setNote(traspPitch.split("/")[0]);
+            return n;
         }
-        short notePC = i;
+        else
+            throw new IllegalArgumentException();
+    }
+    
+    public static int continuousPitchClassInterval(Note n1, Note n2) {
+        int cpc1 = n1.getContinuousPitchCode();
+        int cpc2 = n2.getContinuousPitchCode();
+        return cpc2 - cpc1;
+    }
+    
+    public static Note cpcNoteTrasposition(Note n, int cpcInterval) {
+        int cpc = n.getContinuousPitchCode();
         
-        short trasposition = (short) ((notePC + pcTrasposition) % 12);
-        String traspPitch = ConversionsFrom.conversionFromPC("" + trasposition);
+        int trasposition = cpc + cpcInterval;
+        String traspPitch = ConversionsFrom.conversionFromCPC("" + trasposition);
         n.setNote(traspPitch.split("/")[0]);
-        return n;
+        int octave = 0;
+        try {
+                octave = Integer.parseInt(traspPitch.split("/")[1]);
+            } catch (NumberFormatException e) {
+                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+                throw new IllegalArgumentException("Valore ottava errato (" + traspPitch.split("/")[1] + ")");
+            }
+        n.setOctave(octave);
+        return n;     
     }
     
 }

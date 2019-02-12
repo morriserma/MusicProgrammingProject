@@ -102,8 +102,23 @@ public class ConversionsTo {
                     check = true;
                 j++;
             }
-            i++;
+            if(check == false)
+                i++;
         }
+        return i;
+     }
+     
+     public static int conversionToCPC(String nota, int octave) {
+         short pc = conversionToPitchClass(nota);
+         int cpc = octave * 12 + pc;
+         return cpc;
+     }
+     
+     public static short conversionToNC(String nota) {
+        char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
+        short i = 0;
+        while(nota.charAt(0) != notes[i])
+            i++;
         return i;
      }
 }
