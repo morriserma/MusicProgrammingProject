@@ -117,7 +117,7 @@ public class ConversionsTo {
      public static short conversionToNC(Note n) {
         char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
         short i = 0;
-        while(n.getNote().charAt(0) != notes[i])
+        while(i < notes.length && n.getNote().charAt(0) != notes[i])
             i++;
         return i;
      }

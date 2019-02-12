@@ -62,7 +62,7 @@ public class Progetto {
         
         m.melodyCPCITrasposition(-1);
         for(int i = 0; i < m.getLenght(); i++) {
-            System.out.println("Melodia trasposta: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
+            System.out.println("Melodia trasposta con CPCI: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
         }
         
         Note n10 = new Note("c", 4);
@@ -76,7 +76,17 @@ public class Progetto {
         Note n14 = new Note("5", "nc");
         System.out.println("5 NC --> " + n14.getNote() + "" +n14.getOctave());
         System.out.println(n12.getNote() + "" + n12.getOctave() + " NC --> " + n12.getNameClass());
+        
+        System.out.println(n14.getNote() + "," +n13.getNote() + " interval " + Manipulations.ncInterval(n14, n13));
+        System.out.println(n14.getNote() + "," +n13.getNote() + " interval inversion " + Manipulations.nameClassIntervalInversion(n14, n13));
+        
+        m.melodyNCITrasposition((short) (3));
+        for(int i = 0; i < m.getLenght(); i++) {
+            System.out.println("Melodia trasposta con NCI: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
+        }
+        
     }
     
+       
     
 }

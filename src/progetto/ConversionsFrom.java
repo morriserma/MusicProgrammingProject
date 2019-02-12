@@ -167,9 +167,9 @@ public class ConversionsFrom {
     }
     
     public static String conversionFromNC(String nota) {
-        String[] notes = {"c", "d", "e", "f", "g", "a", "b"};
+        char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
         
-        String pitch = "";
+        char pitch;
         int index = 0;
         try {
             index = Integer.parseInt(nota);

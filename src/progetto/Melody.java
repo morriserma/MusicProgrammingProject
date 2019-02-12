@@ -52,4 +52,10 @@ public class Melody {
             melody.set(i, Manipulations.cpcNoteTrasposition(melody.get(i), pcTrasposition));
         } 
     }
+    
+    public void melodyNCITrasposition(short pcTrasposition) {
+        for(int i = 0; i < this.getLenght(); i++) {
+            melody.set(i, Manipulations.ncNoteTrasposition(melody.get(i), pcTrasposition));
+        } 
+    }
 }

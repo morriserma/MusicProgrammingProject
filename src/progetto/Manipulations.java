@@ -161,13 +161,45 @@ public class Manipulations {
         n.setNote(traspPitch.split("/")[0]);
         int octave = 0;
         try {
-                octave = Integer.parseInt(traspPitch.split("/")[1]);
-            } catch (NumberFormatException e) {
-                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
-                throw new IllegalArgumentException("Valore ottava errato (" + traspPitch.split("/")[1] + ")");
-            }
+            octave = Integer.parseInt(traspPitch.split("/")[1]);
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore ottava errato (" + traspPitch.split("/")[1] + ")");
+        }
         n.setOctave(octave);
-        return n;     
+        return n;
+    }
+    
+    public static short ncInterval(Note n1, Note n2) {
+        short nc1 = n1.getNameClass();
+        short nc2 = n2.getNameClass();
+        
+        short nci = (short) ((nc2 - nc1) % 7);
+        if(nci <= 3)
+            return nci;
+        else
+            return (short) (7 - nci);
+            
+    }
+    
+    public static short nameClassIntervalInversion(Note n1, Note n2) {
+        return (short) ((7 - ncInterval(n1, n2)) % 7);
+    }
+    
+    public static Note ncNoteTrasposition(Note n, short ncInterval) {
+        if(ncInterval > 0 && ncInterval <= 7) {
+            char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
+
+            int i = 0;
+            while(i < notes.length && n.getNote().charAt(0) != notes[i])
+                i++;
+            short trasposition = (short) ((i + ncInterval) % 7);
+            String traspPitch = ConversionsFrom.conversionFromNC("" + trasposition);
+            n.setNote(traspPitch.split("/")[0]);
+            return n;
+        }
+        else
+            throw new IllegalArgumentException();        
     }
     
 }
