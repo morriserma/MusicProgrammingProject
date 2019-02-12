@@ -5,10 +5,10 @@ public class Manipulations {
         if(melody.getLenght() > 0) {
             int minMidiPitch = 127;
             for (int i = 0; i < melody.getLenght(); i++) {
-                String note = melody.getNoteAt(i).getNote();
-                int octave = melody.getNoteAt(i).getOctave();
-                if(ConversionsTo.convertsionToMIDI(note, octave) < minMidiPitch)
-                    minMidiPitch = ConversionsTo.convertsionToMIDI(note, octave);
+                //String note = melody.getNoteAt(i).getNote();
+                //int octave = melody.getNoteAt(i).getOctave();
+                if(ConversionsTo.convertsionToMIDI(melody.getNoteAt(i)) < minMidiPitch)
+                    minMidiPitch = ConversionsTo.convertsionToMIDI(melody.getNoteAt(i));
             }
             String pitchOctave = ConversionsFrom.conversionFromMidiPitch(minMidiPitch);
             String pitch = pitchOctave.split("/")[0];
@@ -31,10 +31,10 @@ public class Manipulations {
         if(melody.getLenght() > 0) {
             int maxMidiPitch = 0;
             for (int i = 0; i < melody.getLenght(); i++) {
-                String note = melody.getNoteAt(i).getNote();
-                int octave = melody.getNoteAt(i).getOctave();
-                if(ConversionsTo.convertsionToMIDI(note, octave) > maxMidiPitch)
-                    maxMidiPitch = ConversionsTo.convertsionToMIDI(note, octave);
+                //String note = melody.getNoteAt(i).getNote();
+                //int octave = melody.getNoteAt(i).getOctave();
+                if(ConversionsTo.convertsionToMIDI(melody.getNoteAt(i)) > maxMidiPitch)
+                    maxMidiPitch = ConversionsTo.convertsionToMIDI(melody.getNoteAt(i));
             }
             String pitchOctave = ConversionsFrom.conversionFromMidiPitch(maxMidiPitch);
             String pitch = pitchOctave.split("/")[0];

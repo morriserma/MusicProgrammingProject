@@ -102,34 +102,34 @@ public class Note {
 
 ////////////////////////////////////////////////////////////////////////////////
     public String getHelmholtz() {
-        return ConversionsTo.conversionToHelm(note, octave);
+        return ConversionsTo.conversionToHelm(this);
     }
     
     public String getScientificNotation() {
-        return ConversionsTo.conversionToScientificNotation(note, octave);
+        return ConversionsTo.conversionToScientificNotation(this);
     }
     
     public String getNeolatinNotation() {
-        return ConversionsTo.conversionToNeolatin(note, octave);
+        return ConversionsTo.conversionToNeolatin(this);
     }
     
     public float getFreq() {
-        return ConversionsTo.conversionToFrequency(note, octave);
+        return ConversionsTo.conversionToFrequency(this);
     }
     
     public int getMIDIPitch() {
-        return ConversionsTo.convertsionToMIDI(note, octave);
+        return ConversionsTo.convertsionToMIDI(this);
     }
     
     public short getPitchClass() {
-        return ConversionsTo.conversionToPitchClass(note);
+        return ConversionsTo.conversionToPitchClass(this);
     }
     
     public int getContinuousPitchCode() {
-        return ConversionsTo.conversionToCPC(note, octave);
+        return ConversionsTo.conversionToCPC(this);
     }
     
     public short getNameClass() {
-        return ConversionsTo.conversionToNC(note);
+        return ConversionsTo.conversionToNC(this);
     }
 }
