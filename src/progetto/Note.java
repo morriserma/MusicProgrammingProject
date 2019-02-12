@@ -69,6 +69,9 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromNC(noteLow);
         else if (notationLow.equals("cnc"))
             pitchOctave = ConversionsFrom.conversionFromCNC(noteLow);
+        else if (notationLow.equals("binomial"))
+            pitchOctave = ConversionsFrom.conversionFromBinomial(noteLow);
+        
         
         parts = pitchOctave.split("/");
         int octaveParam = 0;

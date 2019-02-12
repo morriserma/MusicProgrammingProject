@@ -94,5 +94,7 @@ public class Progetto {
         
         Note n16 = new Note("28", "cnc");
         System.out.println("CNC --> " + n16.getNote() + "" + n16.getOctave());
+        
+        Note n17 = new Note("<10,0>", "binomial");
     }
 }

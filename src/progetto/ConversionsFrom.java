@@ -112,23 +112,41 @@ public class ConversionsFrom {
    
         if (octave >= 0 && octave <=10) {
             int i = 0;
-            while (b == false && i < notes.length) {
-                if (notes[i].length() > 1) {
-                    parts = notes[i].split("/");
-                    if (parts[0].equals(p) || parts[1].equals(p))
+            int j = 0;
+            while (i < notes.length && b == false) {
+                j = 0;
+                parts = notes[i].split("/");
+                while(j < parts.length && b == false) {
+                    if (parts[j].equals(p))
                         b = true;
+                    j++;
                 }
-                else {
-                    if (notes[i].equals(p))
-                        b = true;
-                    else
-                        b = false;
-                }
+
                 i++;
             }
         }
         else
             b = false;
+//        if (octave >= 0 && octave <=10) {
+//            int i = 0;
+//            int j = 0;
+//            while (b == false && i < notes.length) {
+//                if (notes[i].length() > 1) {
+//                    parts = notes[i].split("/");
+//                    if (parts[0].equals(p) || parts[1].equals(p))
+//                        b = true;
+//                }
+//                else {
+//                    if (notes[i].equals(p))
+//                        b = true;
+//                    else
+//                        b = false;
+//                }
+//                i++;
+//            }
+//        }
+//        else
+//            b = false;
         return b;
     }
     
@@ -196,6 +214,31 @@ public class ConversionsFrom {
         int octave = notaInt / 7;
         int nc = notaInt % 7;
         
-        return conversionFromNC(""+nc).split("/")[0] + "/" + octave;
+        return conversionFromNC("" + nc).split("/")[0] + "/" + octave;
+    }
+    
+    public static String conversionFromBinomial(String nota) {
+        String[][] notes = {
+            {"c","c#","cx","","","","","","","","cbb","cb"},
+            {"dbb", "db", "d", "d#", "dx", "", "", "", "", "", "", ""},
+            {"", "", "ebb", "eb", "e", "e#", "ex", "", "", "", "", ""},
+            {"", "", "", "fbb", "fb", "f", "f#", "fx", "", "", "", ""},
+            {"", "", "", "", "", "gbb", "gb", "g", "g#", "gx", "", ""},
+            {"", "", "", "", "", "", "", "abb", "ab", "a", "a#", "ax"},
+            {"b#", "bx", "", "", "", "", "", "", "", "bbb", "bb", "b"}};
+        
+        String pc = nota.split(",")[0].substring(1, nota.split(",")[0].length());
+        String nc = nota.split(",")[1].substring(0, nota.split(",")[1].length() - 1);
+        
+        int pcInt;
+        int ncInt;
+        try {
+           pcInt = Integer.parseInt(pc);    
+           ncInt = Integer.parseInt(nc);  
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore pc o nc errato (" + nota + ")");
+        }
+        return notes[ncInt][pcInt] + "/" + 4;
     }
 }

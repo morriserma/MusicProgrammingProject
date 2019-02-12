@@ -126,4 +126,8 @@ public class ConversionsTo {
          short cnc = (short) ((n.getOctave() * 7) + n.getNameClass());
          return cnc;
      }
+     
+     public static String conversionToBinomial(Note n) {
+         return "<" + n.getPitchClass() + "," + n.getNameClass() + ">";
+     }
 }
