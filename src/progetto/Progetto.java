@@ -73,12 +73,18 @@ public class Progetto {
         Note n13 = new Note("38", "cpc");
         System.out.println("CPCI tra 63 e 38: " + Manipulations.continuousPitchClassInterval(n12, n13));
         
-        Note n14 = new Note("5", "nc");
-        System.out.println("5 NC --> " + n14.getNote() + "" +n14.getOctave());
+        Note n14 = new Note("0", "nc");
+        Note n15 = new Note("6", "nc");
+        //System.out.println("5 NC --> " + n14.getNote() + "" +n14.getOctave());
         System.out.println(n12.getNote() + "" + n12.getOctave() + " NC --> " + n12.getNameClass());
         
-        System.out.println(n14.getNote() + "," +n13.getNote() + " interval " + Manipulations.ncInterval(n14, n13));
-        System.out.println(n14.getNote() + "," +n13.getNote() + " interval inversion " + Manipulations.nameClassIntervalInversion(n14, n13));
+        System.out.println(n14.getNote() + "," +n15.getNote() + " interval " + Manipulations.ncInterval(n14, n15) + " --> " 
+                +Manipulations.ncIntervalName(Manipulations.ncInterval(n14, n15)) + ", NIC: " 
+                + Manipulations.nameIntervalClass(n14, n15));
+
+        
+        System.out.println(n14.getNote() + "," +n13.getNote() + " interval inversion " 
+                + Manipulations.nameClassIntervalInversion(n14, n13));
         
         m.melodyNCITrasposition((short) (3));
         for(int i = 0; i < m.getLenght(); i++) {

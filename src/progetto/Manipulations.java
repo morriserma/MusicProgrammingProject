@@ -105,7 +105,7 @@ public class Manipulations {
             case 9: return "Sesta maggiore";
             case 10: return "Settima minore";
             case 11: return "Settima maggiore";
-            default: throw new IllegalArgumentException();
+            default: throw new IllegalArgumentException("Il valore " + pci + " non è valido");
             }
     }
     
@@ -144,7 +144,7 @@ public class Manipulations {
             return n;
         }
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Il valore " + pcInterval + " non è valido");
     }
     
     public static int continuousPitchClassInterval(Note n1, Note n2) {
@@ -175,10 +175,11 @@ public class Manipulations {
         short nc2 = n2.getNameClass();
         
         short nci = (short) ((nc2 - nc1) % 7);
-        if(nci <= 3)
-            return nci;
+
+        if(nci < 0)
+            return (short) (nci + 7);
         else
-            return (short) (7 - nci);
+            return nci;
             
     }
     
@@ -202,4 +203,29 @@ public class Manipulations {
             throw new IllegalArgumentException();        
     }
     
+    public static short nameIntervalClass(Note n1, Note n2) {
+        short nc1 = n1.getNameClass();
+        short nc2 = n2.getNameClass();
+        
+        short nci = (short) Math.abs((nc2 - nc1) % 7);
+
+        if(nci <= 3)
+            return nci;
+        else {
+            return (short) (7 - nci);
+        }
+    }
+    
+    public static String ncIntervalName(short nci) {
+        switch(Math.abs(nci)){
+            case 0: return "Unisono/Ottava";
+            case 1: return "Seconda";
+            case 2: return "Terza";
+            case 3: return "Quarta";
+            case 4: return "Quinta";
+            case 5: return "Sesta";
+            case 6: return "Settima";
+            default: throw new IllegalArgumentException("Il valore " + nci + " non è valido");
+        }
+    }
 }
