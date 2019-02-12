@@ -130,4 +130,8 @@ public class ConversionsTo {
      public static String conversionToBinomial(Note n) {
          return "<" + n.getPitchClass() + "," + n.getNameClass() + ">";
      }
+     
+     public static short conversionToBR(Note n) {
+         return (short) ((n.getPitchClass() * 10) + n.getNameClass());
+     }
 }

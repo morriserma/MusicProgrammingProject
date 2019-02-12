@@ -239,6 +239,29 @@ public class ConversionsFrom {
             //System.out.println("Valore Pitch Class errato (" + nota + ")");
             throw new IllegalArgumentException("Valore pc o nc errato (" + nota + ")");
         }
-        return notes[ncInt][pcInt] + "/" + 4;
+        if(pcInt >=0 && pcInt <= 11 && ncInt >= 0 && ncInt <= 6)
+            return notes[ncInt][pcInt] + "/" + 4;
+        else
+            throw new IllegalArgumentException("Valore pc o nc errato (" + nota + ")");
+    }
+    
+    public static String conversionFromBR(String nota) {
+        int br;
+        try {
+            br = Integer.parseInt(nota);
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore BR errato (" + nota + ")");
+        }
+        if(br <= 116 && br >= 0) {
+            int pc = br / 10;
+            int nc = br % 10;
+            if(pc >=0 && pc <= 11 && nc >= 0 && nc <= 6)
+                return conversionFromBinomial("<" + pc + "," + nc + ">");
+            else
+                throw new IllegalArgumentException("Valore BR errato (" + nota + ")");
+        }
+        else
+            throw new IllegalArgumentException("Valore BR errato (" + nota + ")");
     }
 }

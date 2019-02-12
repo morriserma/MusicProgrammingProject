@@ -71,7 +71,8 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromCNC(noteLow);
         else if (notationLow.equals("binomial"))
             pitchOctave = ConversionsFrom.conversionFromBinomial(noteLow);
-        
+        else if (notationLow.equals("br"))
+            pitchOctave = ConversionsFrom.conversionFromBR(noteLow);
         
         parts = pitchOctave.split("/");
         int octaveParam = 0;
@@ -140,5 +141,9 @@ public class Note {
     
     public short getContinuousNameCode() {
         return ConversionsTo.converstionToCNC(this);
+    }
+    
+    public short getBR() {
+        return ConversionsTo.conversionToBR(this);
     }
 }
