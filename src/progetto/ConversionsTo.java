@@ -134,4 +134,8 @@ public class ConversionsTo {
      public static short conversionToBR(Note n) {
          return (short) ((n.getPitchClass() * 10) + n.getNameClass());
      }
+     
+     public static int conversionToCBR(Note n) {
+         return n.getOctave() * 1000 + n.getBR();
+     }
 }

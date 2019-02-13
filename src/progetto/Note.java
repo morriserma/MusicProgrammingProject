@@ -73,6 +73,8 @@ public class Note {
             pitchOctave = ConversionsFrom.conversionFromBinomial(noteLow);
         else if (notationLow.equals("br"))
             pitchOctave = ConversionsFrom.conversionFromBR(noteLow);
+        else if (notationLow.equals("cbr"))
+            pitchOctave = ConversionsFrom.conversionFromCBR(noteLow);
         
         parts = pitchOctave.split("/");
         int octaveParam = 0;

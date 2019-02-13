@@ -239,10 +239,10 @@ public class ConversionsFrom {
             //System.out.println("Valore Pitch Class errato (" + nota + ")");
             throw new IllegalArgumentException("Valore pc o nc errato (" + nota + ")");
         }
-        if(pcInt >=0 && pcInt <= 11 && ncInt >= 0 && ncInt <= 6)
+        if(pcInt >=0 && pcInt <= 11 && ncInt >= 0 && ncInt <= 6 && !notes[ncInt][pcInt].equals(""))
             return notes[ncInt][pcInt] + "/" + 4;
         else
-            throw new IllegalArgumentException("Valore pc o nc errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore pc o nc errato (" + nota + "). Sono supportate al massimo le doppie alterazioni");
     }
     
     public static String conversionFromBR(String nota) {
@@ -263,5 +263,29 @@ public class ConversionsFrom {
         }
         else
             throw new IllegalArgumentException("Valore BR errato (" + nota + ")");
+    }
+    
+    public static String conversionFromCBR(String nota) {
+        int noteInt;
+        try {
+            noteInt = Integer.parseInt(nota);
+        } catch (NumberFormatException e) {
+            //System.out.println("Valore Pitch Class errato (" + nota + ")");
+            throw new IllegalArgumentException("Valore CBR errato (" + nota + ")");
+        }
+        
+        int octave = noteInt / 1000;
+        int br = noteInt % 1000;
+        int pc = br / 10;
+        int nc = br % 10;
+        String fromBin;
+        if(pc >= 0 && pc <=11 && nc >= 0 && nc <= 6) {
+            fromBin = conversionFromBinomial("<" + pc + "," + nc + ">");
+            return fromBin.replaceAll("4", octave + "");
+        }
+        else
+            throw new IllegalArgumentException("Valore PC o NC errato (" + pc + " o " + nc + ")");
+        
+        
     }
 }
