@@ -39,7 +39,7 @@ public class Note {
             throw new IllegalArgumentException();
         
         parts = pitchOctave.split("/");
-        int octaveParam = 0;
+        int octaveParam;
         try {
             octaveParam = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
@@ -103,7 +103,7 @@ public class Note {
     }
 
     public String getNote() {
-        return note;
+        return note.replaceAll(note.substring(0,1), note.substring(0,1).toUpperCase());
     }
 
     public void setOctave(int octave) {
@@ -114,8 +114,22 @@ public class Note {
         this.note = note;
     } 
 
-    public NoteRest getNoteRest() {
+    private NoteRest getNoteRest() {
+        if(n == null)
+            return new NoteRest(0);
         return n;
+    }
+    
+    public String getNoteRestToString() {
+        if(n == null)
+            return null;
+        return n.toString();
+    }
+    
+    public double getNoteRestGetNumericDuration() {
+        if(n == null)
+            return 0;
+        return n.getNumericDuration();
     }
 
     public void setNoteRest(int exp) {

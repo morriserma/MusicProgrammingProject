@@ -104,7 +104,19 @@ public class Progetto {
         System.out.println("1115 --> " + n19.getNote() + "" + n19.getOctave());
         
         Note n20 = new Note("-");
+        //m.add(n20);
         n20.setNoteRest("croma", "italian");
-        System.out.println("Durata pausa: " + n20.getNoteRest().toString());
+        System.out.println("Durata pausa: " + n20.getNoteRestToString());
+        n19.setNoteRest(4);
+        System.out.println(n19.getNote() + " " + n19.getNoteRestToString());
+        
+        System.out.println("Nella melodia sono presenti pause: " + m.countRest() + " e note:" + m.countNotes());
+        System.out.println(n15.getNoteRestToString());
+        
+        m.setBpm(148);
+        n1.setNoteRest(1);
+        n2.setNoteRest(1, 1);
+        n3.setNoteRest("half", "american");
+        System.out.println("Durata melodia: " + m.melodyTime() + " secondi");
     }
 }

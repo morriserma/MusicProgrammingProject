@@ -228,4 +228,6 @@ public class Manipulations {
             default: throw new IllegalArgumentException("Il valore " + nci + " non è valido");
         }
     }
+    
+    
 }

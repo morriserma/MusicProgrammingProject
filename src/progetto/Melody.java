@@ -1,9 +1,13 @@
 package progetto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Melody {
     ArrayList<Note> melody;
+    int bpm;
             
     public Melody() {
         melody = new ArrayList<Note>();
@@ -57,5 +61,48 @@ public class Melody {
         for(int i = 0; i < this.getLenght(); i++) {
             melody.set(i, Manipulations.ncNoteTrasposition(melody.get(i), pcTrasposition));
         } 
+    }
+    
+    public int countRest() {
+        int cont = 0;
+        for(int i = 0; i < this.getLenght(); i++) {
+            if(melody.get(i).getNote().equals("-"))
+                cont++;
+        }
+        return cont;
+    }
+    
+    public int countNotes() {
+       int cont = 0;
+        for(int i = 0; i < this.getLenght(); i++) {
+            if(!melody.get(i).getNote().equals("-"))
+                cont++;
+        }
+        return cont; 
+    }
+
+    public int getBpm() {
+        return bpm;
+    }
+
+    public void setBpm(int bpm) {
+        this.bpm = bpm;
+    }
+    
+    public BigDecimal melodyTime() {
+        if(getBpm() > 0) {
+            double pulseForSecond = (double)60 / getBpm();
+            double time = 0;
+            for(int i = 0; i < this.getLenght(); i++) {
+                //if(!melody.get(i).getNote().equals("-"))
+                if(melody.get(i).getNoteRestGetNumericDuration() != 0)
+                    time = time + (pulseForSecond / melody.get(i).getNoteRestGetNumericDuration());
+            }
+            BigDecimal finalTime = new BigDecimal("" + time + "");
+            finalTime = finalTime.setScale(2, BigDecimal.ROUND_HALF_UP);
+            return finalTime;
+        }
+        else
+            throw new IllegalArgumentException("Valore BPM (" + getBpm()+ ") non valido");
     }
 }

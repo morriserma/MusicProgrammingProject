@@ -97,6 +97,7 @@ class NoteRest {
     }
 
     public double getNumericDuration() {
+        double e = (double) numerator / denominator;
         return (double) numerator / denominator;
     }
 }
