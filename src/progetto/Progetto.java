@@ -118,5 +118,8 @@ public class Progetto {
         n2.setNoteRest(1, 1);
         n3.setNoteRest("half", "american");
         System.out.println("Durata melodia: " + m.melodyTime() + " secondi");
+        
+        System.out.println("La nota " + n3.getNote() + " da " + n3.getNoteRestToString() + " con 115 bpm dura " 
+                + Manipulations.noteTime(115, n3) + " secondi");
     }
 }

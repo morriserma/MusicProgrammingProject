@@ -1,5 +1,7 @@
 package progetto;
 
+import java.math.BigDecimal;
+
 public class Manipulations {
     public static Note lowestPitchOfMelody(Melody melody) {
         if(melody.getLenght() > 0) {
@@ -227,6 +229,21 @@ public class Manipulations {
             case 6: return "Settima";
             default: throw new IllegalArgumentException("Il valore " + nci + " non è valido");
         }
+    }
+    
+    public static BigDecimal noteTime(int bpm, Note n) {
+        if(bpm > 0) {
+            double pulseForSecond = (double)60 / bpm;
+            double time = 0;
+            
+            time = time + (pulseForSecond / n.getNoteRestGetNumericDuration());
+            
+            BigDecimal finalTime = new BigDecimal("" + time + "");
+            finalTime = finalTime.setScale(2, BigDecimal.ROUND_HALF_UP);
+            return finalTime;
+        }
+        else
+            throw new IllegalArgumentException("Valore BPM (" + bpm + ") non valido");
     }
     
     

@@ -105,4 +105,5 @@ public class Melody {
         else
             throw new IllegalArgumentException("Valore BPM (" + getBpm()+ ") non valido");
     }
+
 }
