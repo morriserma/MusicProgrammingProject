@@ -96,11 +96,15 @@ public class Progetto {
         System.out.println("CNC --> " + n16.getNote() + "" + n16.getOctave());
         
         Note n17 = new Note("<10,0>", "binomial");
-        Note n18 = new Note("31", "br");
+        Note n18 = new Note("22", "br");
         System.out.println("10 BR --> " + n18.getNote() + "" + n18.getOctave());
         System.out.println(n11.getNote() + " --> " + n11.getBR() + " BR");
         
         Note n19 = new Note("1115", "cbr");
         System.out.println("1115 --> " + n19.getNote() + "" + n19.getOctave());
+        
+        Note n20 = new Note("-");
+        n20.setNoteRest("croma", "italian");
+        System.out.println("Durata pausa: " + n20.getNoteRest().toString());
     }
 }

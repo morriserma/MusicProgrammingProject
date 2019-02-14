@@ -26,7 +26,7 @@ public class Melody {
     }
     
     public Note getNoteAt(int i) {
-        return melody.get(i);
+        return (Note) melody.get(i);
     }
     
     public void resetMelody() {

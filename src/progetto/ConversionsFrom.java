@@ -218,6 +218,14 @@ public class ConversionsFrom {
     }
     
     public static String conversionFromBinomial(String nota) {
+//        String[][] notes = {
+//            {"C", "C#", "Cx", "Cx#", "Cxx", "Cxx#", "Cxxx", "Cbbbbb", "Cbbbb", "Cbbb", "Cbb", "Cb"},
+//            {"Dbb", "Db", "D", "D#", "Dx", "Dx#", "Dxx", "Dxx#", "Dxxx", "Dbbbbb", "Dbbbb", "Dbbb"},
+//            {"Ebbbb", "Ebbb", "Ebb", "Eb", "E", "E#", "Ex", "Ex#", "Exx", "Exx#", "Exxx", "Ebbbbb"},
+//            {"Fbbbbb", "Fbbbb", "Fbbb", "Fbb", "Fb", "F", "F#", "Fx", "Fx#", "Fxx", "Fxx#", "Fxxx"},
+//            {"Gxx#", "Gxxx", "Gbbbbb", "Gbbbb", "Gbbb", "Gbb", "Gb", "G", "G#", "Gx", "Gx#", "Gxx"},
+//            {"Ax#", "Axx", "Axx#", "Axxx", "Abbbbb", "Abbbb", "Abbb", "Abb", "Ab", "A", "A#", "Ax"},
+//            {"B#", "Bx", "Bx#", "Bxx", "Bxx#", "Bxxx", "Bbbbbb", "Bbbbb", "Bbbb", "Bbb", "Bb", "B"}};
         String[][] notes = {
             {"c","c#","cx","","","","","","","","cbb","cb"},
             {"dbb", "db", "d", "d#", "dx", "", "", "", "", "", "", ""},

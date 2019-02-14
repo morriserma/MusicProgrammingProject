@@ -105,7 +105,7 @@ public class Manipulations {
             case 9: return "Sesta maggiore";
             case 10: return "Settima minore";
             case 11: return "Settima maggiore";
-            default: throw new IllegalArgumentException("Il valore " + pci + " non è valido");
+            default: throw new IllegalArgumentException("Il valore (" + pci + ") non è valido");
             }
     }
     

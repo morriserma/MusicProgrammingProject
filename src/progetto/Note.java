@@ -2,7 +2,9 @@ package progetto;
 
 public class Note {
     int octave;
-    String note;   
+    String note;
+    //double durata;
+    NoteRest n;
 
 //////////////////////Constructors//////////////////////////////////////////////
     public Note(String note, int octave) {
@@ -11,16 +13,20 @@ public class Note {
             this.note = note.toLowerCase();
         }
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Errore di costruzione della nota (valore " + note + " non valido)");
     }
     
     public Note(String note) {
-        this.octave = 4;
-        if (ConversionsFrom.checkNoteValidity(note, octave)) {
-            this.note = note.toLowerCase();
+        if(!note.equals("-")) {
+            this.octave = 4;
+            if (ConversionsFrom.checkNoteValidity(note, octave)) {
+                this.note = note.toLowerCase();
+            }
+            else
+                throw new IllegalArgumentException("Errore di costruzione della nota (valore " + note + " non valido)");
         }
         else
-            throw new IllegalArgumentException();
+            this.note = note;
     }
 
     public Note(int midiPitch) {
@@ -107,6 +113,29 @@ public class Note {
     public void setNote(String note) {
         this.note = note;
     } 
+
+    public NoteRest getNoteRest() {
+        return n;
+    }
+
+    public void setNoteRest(int exp) {
+        n = new NoteRest(exp);
+        //this.durata = n.getNumericDuration();
+    }
+    
+    public void setNoteRest(int num, int exp) {
+        n = new NoteRest(num, exp);
+        //this.durata = n.getNumericDuration();
+    }
+    
+    public void setNoteRest(String value, String notationLanguage) {
+        n = new NoteRest(value, notationLanguage);
+        //this.durata = n.getNumericDuration();
+    }
+    
+    
+    
+    
 
 ////////////////////////////////////////////////////////////////////////////////
     public String getHelmholtz() {
