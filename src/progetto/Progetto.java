@@ -121,5 +121,17 @@ public class Progetto {
         
         System.out.println("La nota " + n3.getNote() + " da " + n3.getNoteRestToString() + " con 115 bpm dura " 
                 + Manipulations.noteTime(115, n3) + " secondi");
+        
+        System.out.println("//////////////////////////////////////////////////");
+        Melody m2 = new Melody();
+        Note nn1 = new Note(61);
+        Note nn2 = new Note("c'", "helmholtz");
+        Note nn3 = new Note("11", "pc");
+        Note nn4 = new Note("4", "nc");
+        m2.add(nn1);
+        m2.add(nn2);
+        m2.add(nn3);
+        m2.add(nn4);
+        System.out.println(m2.toString());
     }
 }

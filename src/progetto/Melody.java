@@ -1,8 +1,6 @@
 package progetto;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Melody {
@@ -20,11 +18,7 @@ public class Melody {
     public void remove(Note n) {
         melody.remove(n);
     }
-    
-    public void editNote(Note newNote, int notePos) {
-       
-    }
-    
+        
     public int getLenght() {
         return melody.size();
     }
@@ -105,5 +99,16 @@ public class Melody {
         else
             throw new IllegalArgumentException("Valore BPM (" + getBpm()+ ") non valido");
     }
+
+    @Override
+    public String toString() {
+        String str = "Melody{" + "bpm=" + bpm + ", dimensions=" + melody.size() + "}\n";
+        for (Note melody1 : melody) {
+            str += "Nota: " + melody1.getNote() + ", Ottava: " +melody1.getOctave() + "\n";
+        }
+        return str;
+    }
+    
+    
 
 }

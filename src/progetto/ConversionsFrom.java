@@ -83,7 +83,7 @@ public class ConversionsFrom {
         if(checkNoteValidity(pitch, octave))
             return pitch + "/" + octave;
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Valore helmholtz (" + note + ") errato");
     }
     
     public static String conversionFromFrequency(String nota) {   
