@@ -270,5 +270,40 @@ public class Manipulations {
         return br_intervals[nc][pc];
     }
     
-    
+    public static Note noteAtDistance(Note n1, String interval) {
+        String[][] intervals = {
+            {"P1", "A1", "2A1", "", "", "", "", "", "", "", "2d1", "d1"},
+            {"d2", "m2", "M2", "A2", "2A2", "", "", "", "", "", "", ""},
+            {"", "", "d3", "m3", "M3", "A3", "2A3", "", "", "", "", ""},
+            {"", "", "", "2d4", "d4", "P4", "A4", "2A4", "", "", "", ""},
+            {"", "", "", "", "", "2d5", "d5", "P5", "A5", "2A5", "", ""},
+            {"", "", "", "", "", "", "", "d6", "m6", "M6", "A6", "2A6"},
+            {"A7", "2A7", "", "", "", "", "", "", "", "d7", "m7", "M7"},};
+        
+        int i = 0;
+        int j = 0;
+        boolean check = false;
+        while(i < intervals.length && check == false) {
+            j = 0;
+            while(j < intervals[i].length && check == false) {
+                if(intervals[i][j].equals(interval))
+                    check = true;
+                else
+                    j++;
+            }
+            if(check == false)
+                i++;       
+        }
+        
+        int pcNoteInterval = j;
+        int ncNoteInterval = i;
+        int nc_end = (n1.getNameClass() + ncNoteInterval) % 7;
+        int pc_end = (n1.getPitchClass() + pcNoteInterval) % 12;
+        
+        String note = ConversionsFrom.conversionFromBinomial("<" + pc_end + "," + nc_end + ">");
+       
+        Note n = new Note(note.split("/")[0]);
+        return n;
+    }
+        
 }

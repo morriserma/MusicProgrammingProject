@@ -136,7 +136,7 @@ public class Progetto {
         System.out.println(m2.toString());
         System.out.println("//////////////////////////////////////////////////");
         System.out.println("Interval from Binomial Note: " + Manipulations.binomialInterval(nn2, nn3));
-              
+        System.out.println("Nota iniziale: " + nn1.toString() + ", Intervallo: " + "d4" + " --> " + Manipulations.noteAtDistance(nn1, "d4").toString());
              
     }
 }
