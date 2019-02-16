@@ -27,8 +27,8 @@ public class ConversionsFrom {
             case "sol": return "g" + alteration + "/" + octave;
             case "la": return "a" + alteration + "/" + octave;
             case "si": return "b" + alteration + "/" + octave;
+            default: return "";
         }
-        return "";
     }
     
     public static String conversionFromAnglo(String note) {

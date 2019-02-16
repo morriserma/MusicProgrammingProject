@@ -73,7 +73,7 @@ class NoteRest {
 
     @Override
     public String toString() {
-        return ("- [" + numerator + "/" + denominator + "]");
+        return ("[" + numerator + "/" + denominator + "]");
     }
 
     public void halveValue() {

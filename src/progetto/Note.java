@@ -82,6 +82,7 @@ public class Note {
         else if (notationLow.equals("cbr"))
             pitchOctave = ConversionsFrom.conversionFromCBR(noteLow);
         
+        pitchOctave = pitchOctave.toLowerCase();
         parts = pitchOctave.split("/");
         int octaveParam = 0;
         try {
@@ -103,7 +104,8 @@ public class Note {
     }
 
     public String getNote() {
-        return note.replaceAll(note.substring(0,1), note.substring(0,1).toUpperCase());
+        //return note.replaceAll(note.substring(0,1), note.substring(0,1).toUpperCase());
+        return note;
     }
 
     public void setOctave(int octave) {
@@ -145,6 +147,14 @@ public class Note {
     public void setNoteRest(String value, String notationLanguage) {
         n = new NoteRest(value, notationLanguage);
         //this.durata = n.getNumericDuration();
+    }
+
+    @Override
+    public String toString() {
+        if(n != null)
+            return "Note{" + "octave=" + octave + ", note=" + note + ", type=" + n.toString() + '}';
+        else
+            return "Note{" + "octave=" + octave + ", note=" + note + ", type= Non specificato}";
     }
     
     

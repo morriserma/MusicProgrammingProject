@@ -246,5 +246,29 @@ public class Manipulations {
             throw new IllegalArgumentException("Valore BPM (" + bpm + ") non valido");
     }
     
+    public static String binomialInterval(Note n1, Note n2) {
+        String[][] br_intervals = {
+            {"P1", "A1", "2A1", "3A1", "4A1", "5A1", "6A1", "5d1", "4d1", "3d1", "2d1", "d1"},
+            {"d2", "m2", "M2", "A2", "2A2", "3A2", "4A2", "5A2", "5d2", "4d2", "3d2", "2d2"},
+            {"3d3", "2d3", "d3", "m3", "M3", "A3", "2A3", "3A3", "4A3", "5A3", "5d3", "4d3"},
+            {"5d4", "4d4", "3d4", "2d4", "d4", "P4", "A4", "2A4", "3A4", "4A4", "5A4", "6A4"},
+            {"5A5", "6A5", "5d5", "4d5", "3d5", "2d5", "d5", "P5", "A5", "2A5", "3A5", "4A5"},
+            {"3A6", "4A6", "5A6", "5d6", "4d6", "3d6", "2d6", "d6", "m6", "M6", "A6", "2A6"},
+            {"A7", "2A7", "3A7", "4A7", "5A7", "5d7", "4d7", "3d7", "2d7", "d7", "m7", "M7"},};
+        
+        short pc1 = n1.getPitchClass();
+        short nc1 = n1.getNameClass();
+        short pc2 = n2.getPitchClass();
+        short nc2 = n2.getNameClass();
+        
+        short pc = (short) (pc2 - pc1);
+        short nc = (short) (nc2 - nc1);
+        if(pc < 0)
+            pc += 12;
+        if(nc < 0)
+            nc += 7;
+        return br_intervals[nc][pc];
+    }
+    
     
 }

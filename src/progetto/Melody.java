@@ -8,7 +8,7 @@ public class Melody {
     int bpm;
             
     public Melody() {
-        melody = new ArrayList<Note>();
+        melody = new ArrayList<>();
     }
     
     public void add(Note n) {
@@ -60,7 +60,7 @@ public class Melody {
     public int countRest() {
         int cont = 0;
         for(int i = 0; i < this.getLenght(); i++) {
-            if(melody.get(i).getNote().equals("-"))
+            if(melody.get(i).getNote().equalsIgnoreCase("-"))
                 cont++;
         }
         return cont;
@@ -69,7 +69,7 @@ public class Melody {
     public int countNotes() {
        int cont = 0;
         for(int i = 0; i < this.getLenght(); i++) {
-            if(!melody.get(i).getNote().equals("-"))
+            if(!melody.get(i).getNote().equalsIgnoreCase("-"))
                 cont++;
         }
         return cont; 
@@ -104,7 +104,8 @@ public class Melody {
     public String toString() {
         String str = "Melody{" + "bpm=" + bpm + ", dimensions=" + melody.size() + "}\n";
         for (Note melody1 : melody) {
-            str += "Nota: " + melody1.getNote() + ", Ottava: " +melody1.getOctave() + "\n";
+            //str += "Nota: " + melody1.getNote() + ", Ottava: " +melody1.getOctave() + "\n";
+            str += melody1.toString() + "\n";
         }
         return str;
     }

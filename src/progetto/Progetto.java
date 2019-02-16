@@ -125,13 +125,18 @@ public class Progetto {
         System.out.println("//////////////////////////////////////////////////");
         Melody m2 = new Melody();
         Note nn1 = new Note(61);
-        Note nn2 = new Note("c'", "helmholtz");
-        Note nn3 = new Note("11", "pc");
+        Note nn2 = new Note("b#'", "helmholtz");
+        Note nn3 = new Note("7", "pc");
         Note nn4 = new Note("4", "nc");
         m2.add(nn1);
         m2.add(nn2);
         m2.add(nn3);
         m2.add(nn4);
+        nn1.setNoteRest("croma", "italian");
         System.out.println(m2.toString());
+        System.out.println("//////////////////////////////////////////////////");
+        System.out.println("Interval from Binomial Note: " + Manipulations.binomialInterval(nn2, nn3));
+              
+             
     }
 }
