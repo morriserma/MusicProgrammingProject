@@ -39,6 +39,26 @@ public class Melody {
         return Manipulations.highestPitchOfMelody(this);
     }
     
+    public Note getMiddleNote() {
+        Note highest = getHighestNote();
+        Note lowest = getLowestNote();
+        
+        int highMidi = highest.getMIDIPitch();
+        int lowMidi = lowest.getMIDIPitch();
+        int middlePitch = (short) ((highMidi + lowMidi) / 2);
+        String note = ConversionsFrom.conversionFromMidiPitch(middlePitch);
+        String pitch = note.split("/")[0];
+        int octave;
+        try {
+                octave = Integer.parseInt(note.split("/")[1]);
+            } catch (NumberFormatException e) {
+                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+                throw new IllegalArgumentException("Valore ottava errato (" + note.split("/")[1] + ")");
+            }
+        Note n = new Note(pitch, octave);
+        return n;
+    }
+    
     public void melodyPCITrasposition(short pcTrasposition) {
         for(int i = 0; i < this.getLenght(); i++) {
             melody.set(i, Manipulations.pcNoteTrasposition(melody.get(i), pcTrasposition));    

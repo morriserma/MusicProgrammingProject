@@ -1,6 +1,8 @@
 package progetto;
 
+//Class that manage possible Note input formats
 public class ConversionsFrom {
+    //Conversion from NeoLatin rappresentation
     public static String conversionFromNeolatin(String note) {
         String pitch = note.split("(?<=\\D)(?=\\d)")[0];
         String alteration = "";
@@ -31,6 +33,7 @@ public class ConversionsFrom {
         }
     }
     
+    //Conversion from English rappresentation
     public static String conversionFromAnglo(String note) {
         String pitch = note.split("(?<=\\D)(?=\\d)")[0];
         int octave = 0;
@@ -43,12 +46,17 @@ public class ConversionsFrom {
         return pitch + "/" + octave;
     }
     
+    //Conversion from Midi rappresentation
     public static String conversionFromMidiPitch(int midiPitch) {
-        String pitchOctave = ConversionsTo.conversionMidiToPitchOctave(midiPitch);
+        String[] notes = {"c", "c#", "d", "eb", "e", "f", "f#", "g", "g#", "a", "bb", "b"};
+        String pitch = notes[midiPitch % 12];
+        int octave = midiPitch / 12 - 1;
+        String pitchOctave = pitch + "/" + octave;
         String[] parts = pitchOctave.split("/");
         return parts[0] + "/" + parts[1];
     }
     
+    //Conversion from Helmholtz rappresentation
     public static String conversionFromHelmholtz(String note) {
         String pitch;
         int octave;
@@ -86,6 +94,7 @@ public class ConversionsFrom {
             throw new IllegalArgumentException("Valore helmholtz (" + note + ") errato");
     }
     
+    //Conversion from Frequency rappresentation
     public static String conversionFromFrequency(String nota) {   
         int midiPitch;
         double freq = 0;
@@ -103,6 +112,8 @@ public class ConversionsFrom {
         return  conversionFromMidiPitch(midiPitch);
     }
     
+    //Method to check the Note validity. Check if the pitch is correct (max 2 alterations)
+    //and if the octave is in range 0-10
     public static boolean checkNoteValidity(String pitch, int octave) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
@@ -127,29 +138,10 @@ public class ConversionsFrom {
         }
         else
             b = false;
-//        if (octave >= 0 && octave <=10) {
-//            int i = 0;
-//            int j = 0;
-//            while (b == false && i < notes.length) {
-//                if (notes[i].length() > 1) {
-//                    parts = notes[i].split("/");
-//                    if (parts[0].equals(p) || parts[1].equals(p))
-//                        b = true;
-//                }
-//                else {
-//                    if (notes[i].equals(p))
-//                        b = true;
-//                    else
-//                        b = false;
-//                }
-//                i++;
-//            }
-//        }
-//        else
-//            b = false;
         return b;
     }
     
+    //Conversion from PitchClass rappresentation
     public static String conversionFromPC(String nota) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
@@ -170,6 +162,7 @@ public class ConversionsFrom {
         return pitch + "/" + 4;
     }
     
+    //Conversion from ContinuousPitchClass rappresentation
     public static String conversionFromCPC(String nota) {
         int octave = 0;
         short pc = 0;
@@ -184,6 +177,7 @@ public class ConversionsFrom {
         return conversionFromPC("" + pc).split("/")[0] + "/" + octave;
     }
     
+    //Conversion from NameClass rappresentation
     public static String conversionFromNC(String nota) {
         char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
         
@@ -203,6 +197,7 @@ public class ConversionsFrom {
         return pitch + "/" + 4;
     }
     
+    //Conversion from ContinuousNameClass rappresentation
     public static String conversionFromCNC(String nota) {
         int notaInt;
         try {
@@ -217,15 +212,8 @@ public class ConversionsFrom {
         return conversionFromNC("" + nc).split("/")[0] + "/" + octave;
     }
     
+    //Conversion from Binomial rappresentation
     public static String conversionFromBinomial(String nota) {
-//        String[][] notes = {
-//            {"C", "C#", "Cx", "Cx#", "Cxx", "Cxx#", "Cxxx", "Cbbbbb", "Cbbbb", "Cbbb", "Cbb", "Cb"},
-//            {"Dbb", "Db", "D", "D#", "Dx", "Dx#", "Dxx", "Dxx#", "Dxxx", "Dbbbbb", "Dbbbb", "Dbbb"},
-//            {"Ebbbb", "Ebbb", "Ebb", "Eb", "E", "E#", "Ex", "Ex#", "Exx", "Exx#", "Exxx", "Ebbbbb"},
-//            {"Fbbbbb", "Fbbbb", "Fbbb", "Fbb", "Fb", "F", "F#", "Fx", "Fx#", "Fxx", "Fxx#", "Fxxx"},
-//            {"Gxx#", "Gxxx", "Gbbbbb", "Gbbbb", "Gbbb", "Gbb", "Gb", "G", "G#", "Gx", "Gx#", "Gxx"},
-//            {"Ax#", "Axx", "Axx#", "Axxx", "Abbbbb", "Abbbb", "Abbb", "Abb", "Ab", "A", "A#", "Ax"},
-//            {"B#", "Bx", "Bx#", "Bxx", "Bxx#", "Bxxx", "Bbbbbb", "Bbbbb", "Bbbb", "Bbb", "Bb", "B"}};
         String[][] notes = {
             {"c","c#","cx","","","","","","","","cbb","cb"},
             {"dbb", "db", "d", "d#", "dx", "", "", "", "", "", "", ""},
@@ -253,6 +241,7 @@ public class ConversionsFrom {
             throw new IllegalArgumentException("Valore pc o nc errato (" + nota + "). Sono supportate al massimo le doppie alterazioni");
     }
     
+    //Conversion from IntegerBinomialRappresentation rappresentation
     public static String conversionFromBR(String nota) {
         int br;
         try {
@@ -273,6 +262,7 @@ public class ConversionsFrom {
             throw new IllegalArgumentException("Valore BR errato (" + nota + ")");
     }
     
+    //Conversion from ContinuousIntegerBinomialRappresentation rappresentation
     public static String conversionFromCBR(String nota) {
         int noteInt;
         try {

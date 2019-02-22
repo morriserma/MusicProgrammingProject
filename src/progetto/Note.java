@@ -205,4 +205,8 @@ public class Note {
     public String getBinomial() {
         return ConversionsTo.conversionToBinomial(this);
     }
+    
+    public int getCBR() {
+        return ConversionsTo.conversionToCBR(this);
+    }
 }

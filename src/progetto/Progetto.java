@@ -144,5 +144,7 @@ public class Progetto {
         System.out.println("L'inversione di " + nn5.getNote() + " è " + Manipulations.binomialInversion(nn5));
         System.out.println("L'inversione dell' intervallo P4 è " +
                 " --> " + Manipulations.intervalInversion("p4"));
+        System.out.println("HighestNote:" + m2.getHighestNote() + ", LowestNote:" 
+                + m2.getLowestNote() + ", MiddleNote" + m2.getMiddleNote());
     }
 }

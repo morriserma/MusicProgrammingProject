@@ -2,13 +2,14 @@ package progetto;
 
 import java.math.BigDecimal;
 
+//Class that manage some type of Note manipulations that aren't converstions.
+//For example lowest, highest pitch of a melody, Note traspositions, ecc.
 public class Manipulations {
+    //Method used by melody class to find the lowest pitch of melody. (Done with midiPitch)
     public static Note lowestPitchOfMelody(Melody melody) {
         if(melody.getLenght() > 0) {
             int minMidiPitch = 127;
             for (int i = 0; i < melody.getLenght(); i++) {
-                //String note = melody.getNoteAt(i).getNote();
-                //int octave = melody.getNoteAt(i).getOctave();
                 if(ConversionsTo.convertsionToMIDI(melody.getNoteAt(i)) < minMidiPitch)
                     minMidiPitch = ConversionsTo.convertsionToMIDI(melody.getNoteAt(i));
             }
@@ -29,6 +30,7 @@ public class Manipulations {
             return null;
     }
     
+    //Method used by melody class to find the highest pitch of melody. (Done with midiPitch)
     public static Note highestPitchOfMelody(Melody melody) {
         if(melody.getLenght() > 0) {
             int maxMidiPitch = 0;
@@ -48,6 +50,7 @@ public class Manipulations {
             return null;
     }
     
+    //Method used by melody class to find the middle pitch of melody. (Done with midiPitch)
     public static short pitchClassInterval(Note n1, Note n2) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
             "f/e#/gbb", "f#/gb/ex/e##", "g/fx/f##/abb", "g#/ab", "a/gx/g##/bbb", "a#/bb/cbb", "b/ax/a##/cb"};
@@ -87,12 +90,14 @@ public class Manipulations {
         return pci;
     }
     
+    //Method to invert pci
     public static short pitchClassIntervalInversion(Note n1, Note n2) {
         short pci = pitchClassInterval(n1, n2);
         short invertedPCI = (short) ((12 - pci) % 12);
         return invertedPCI;
     }
        
+    //Method used to assign a Name to each pci
     public static String pitchClassIntervalName(short pci) {
         switch(pci){
             case 0: return "Unisono giusto/Ottava giusta";
@@ -111,6 +116,7 @@ public class Manipulations {
             }
     }
     
+    //Method to calculate the intervalClass
     public static short intervalClass(Note n1, Note n2) {
         short pci = pitchClassInterval(n1, n2);
         if(pci <= 6)
@@ -119,6 +125,7 @@ public class Manipulations {
             return (short) (12 - pci);
     }
     
+    //Method used to do a note trasposition according to pcInterval
     public static Note pcNoteTrasposition(Note n, int pcInterval) {
         if(pcInterval > 0 && pcInterval <= 12) {
             String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
@@ -149,12 +156,14 @@ public class Manipulations {
             throw new IllegalArgumentException("Il valore " + pcInterval + " non è valido");
     }
     
+    //Method used to calculate pc interval
     public static int continuousPitchClassInterval(Note n1, Note n2) {
         int cpc1 = n1.getContinuousPitchCode();
         int cpc2 = n2.getContinuousPitchCode();
         return cpc2 - cpc1;
     }
     
+    //Method used to calculate cpc trasposition
     public static Note cpcNoteTrasposition(Note n, int cpcInterval) {
         int cpc = n.getContinuousPitchCode();
         
@@ -172,6 +181,7 @@ public class Manipulations {
         return n;
     }
     
+    //Method used to calculate nc interval
     public static short ncInterval(Note n1, Note n2) {
         short nc1 = n1.getNameClass();
         short nc2 = n2.getNameClass();
@@ -185,10 +195,12 @@ public class Manipulations {
             
     }
     
+    //Method used to calculate nc interval inversion
     public static short nameClassIntervalInversion(Note n1, Note n2) {
         return (short) ((7 - ncInterval(n1, n2)) % 7);
     }
     
+    //Method used to calculate nc Note trasposition
     public static Note ncNoteTrasposition(Note n, short ncInterval) {
         if(ncInterval > 0 && ncInterval <= 7) {
             char[] notes = {'c', 'd', 'e', 'f', 'g', 'a', 'b'};
@@ -205,6 +217,7 @@ public class Manipulations {
             throw new IllegalArgumentException();        
     }
     
+    //Method used to calculate nameIntervalClass
     public static short nameIntervalClass(Note n1, Note n2) {
         short nc1 = n1.getNameClass();
         short nc2 = n2.getNameClass();
@@ -218,6 +231,7 @@ public class Manipulations {
         }
     }
     
+    //Method to find intervals name
     public static String ncIntervalName(short nci) {
         switch(Math.abs(nci)){
             case 0: return "Unisono/Ottava";
@@ -231,6 +245,7 @@ public class Manipulations {
         }
     }
     
+    //Method used to calculate note time based on bpm
     public static BigDecimal noteTime(int bpm, Note n) {
         if(bpm > 0) {
             double pulseForSecond = (double)60 / bpm;
@@ -246,6 +261,7 @@ public class Manipulations {
             throw new IllegalArgumentException("Valore BPM (" + bpm + ") non valido");
     }
     
+    //Method used to calculate binomial interval between 2 notes
     public static String binomialInterval(Note n1, Note n2) {
         String[][] br_intervals = {
             {"P1", "A1", "2A1", "3A1", "4A1", "5A1", "6A1", "5d1", "4d1", "3d1", "2d1", "d1"},
@@ -270,6 +286,7 @@ public class Manipulations {
         return br_intervals[nc][pc];
     }
     
+    //Method used to calculate interval inversion
     public static String intervalInversion(String interval) {
         String[][] intervals = {
             {"P1", "A1", "2A1", "", "", "", "", "", "", "", "2d1", "d1"},
@@ -306,6 +323,7 @@ public class Manipulations {
         return intervals[invertedNC][invertedPC];
     }
     
+    //Method used to calculate the note at "interval" distance from the note n1
     public static Note noteAtDistance(Note n1, String interval) {
         String[][] intervals = {
             {"P1", "A1", "2A1", "", "", "", "", "", "", "", "2d1", "d1"},
@@ -342,6 +360,7 @@ public class Manipulations {
         return n;
     }
     
+    //Method used to calculate the trasposition between Note n and BinomialInterval trasposition name "binTrasp"
     public static Note binomialTrasposition(Note n, String binTrasp) {
         String nBin = n.getBinomial();
         int nPC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[0]);
@@ -355,6 +374,7 @@ public class Manipulations {
         return n1;
     }
     
+    //Method used to calculate binomial inversion
     public static Note binomialInversion(Note n) {
         String nBin = n.getBinomial();
         int nPC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[0]);
@@ -365,6 +385,7 @@ public class Manipulations {
         return n1;
     }
     
+    //Method used to find all homophone of a notes
     public static String getHomophony(Note n) {
         String[][] notes = {
             {"c","c#","cx","","","","","","","","cbb","cb"},
