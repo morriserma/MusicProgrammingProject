@@ -125,6 +125,7 @@ public class Progetto {
         System.out.println("//////////////////////////////////////////////////");
         Melody m2 = new Melody();
         Note nn1 = new Note(61);
+        Note nn5 = new Note(62);
         Note nn2 = new Note("b#'", "helmholtz");
         Note nn3 = new Note("7", "pc");
         Note nn4 = new Note("4", "nc");
@@ -137,6 +138,11 @@ public class Progetto {
         System.out.println("//////////////////////////////////////////////////");
         System.out.println("Interval from Binomial Note: " + Manipulations.binomialInterval(nn2, nn3));
         System.out.println("Nota iniziale: " + nn1.toString() + ", Intervallo: " + "d4" + " --> " + Manipulations.noteAtDistance(nn1, "d4").toString());
-             
+        System.out.println("Gli omofoni di " + nn1.getNote() + " sono: " + Manipulations.getHomophony(nn1));
+        System.out.println("La trasposizione di " + nn5.getNote() + " di <4,2> è: " 
+                + Manipulations.binomialTrasposition(nn5, "<4,2>"));
+        System.out.println("L'inversione di " + nn5.getNote() + " è " + Manipulations.binomialInversion(nn5));
+        System.out.println("L'inversione dell' intervallo P4 è " +
+                " --> " + Manipulations.intervalInversion("p4"));
     }
 }

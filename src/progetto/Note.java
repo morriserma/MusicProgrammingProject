@@ -201,4 +201,8 @@ public class Note {
     public short getBR() {
         return ConversionsTo.conversionToBR(this);
     }
+    
+    public String getBinomial() {
+        return ConversionsTo.conversionToBinomial(this);
+    }
 }

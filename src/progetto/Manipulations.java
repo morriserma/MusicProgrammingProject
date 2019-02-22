@@ -261,13 +261,49 @@ public class Manipulations {
         short pc2 = n2.getPitchClass();
         short nc2 = n2.getNameClass();
         
-        short pc = (short) (pc2 - pc1);
-        short nc = (short) (nc2 - nc1);
+        short pc =  (short) ((short) (pc1 - pc2) % 12);
+        short nc = (short) ((short) (nc1 - nc2) % 7);
         if(pc < 0)
             pc += 12;
         if(nc < 0)
             nc += 7;
         return br_intervals[nc][pc];
+    }
+    
+    public static String intervalInversion(String interval) {
+        String[][] intervals = {
+            {"P1", "A1", "2A1", "", "", "", "", "", "", "", "2d1", "d1"},
+            {"d2", "m2", "M2", "A2", "2A2", "", "", "", "", "", "", ""},
+            {"", "", "d3", "m3", "M3", "A3", "2A3", "", "", "", "", ""},
+            {"", "", "", "2d4", "d4", "P4", "A4", "2A4", "", "", "", ""},
+            {"", "", "", "", "", "2d5", "d5", "P5", "A5", "2A5", "", ""},
+            {"", "", "", "", "", "", "", "d6", "m6", "M6", "A6", "2A6"},
+            {"A7", "2A7", "", "", "", "", "", "", "", "d7", "m7", "M7"},};
+        short pc = 0;
+        short nc = 0;
+        boolean check = false;
+       while (nc < intervals.length && check == false) {
+           pc = 0;
+            while(pc < intervals[nc].length && check == false) {
+                
+                if(interval.equalsIgnoreCase(intervals[nc][pc]))
+                    check = true;
+                if(check == false)
+                    pc++;
+            }
+            if(check == false)
+                nc++;
+            
+        }
+
+        int invertedPC = (12 - pc) % 12;
+        int invertedNC = (7 - nc) % 7;
+        if(pc < 0)
+            pc += 12;
+        if(nc < 0)
+            nc += 7;
+        
+        return intervals[invertedNC][invertedPC];
     }
     
     public static Note noteAtDistance(Note n1, String interval) {
@@ -304,6 +340,49 @@ public class Manipulations {
        
         Note n = new Note(note.split("/")[0]);
         return n;
+    }
+    
+    public static Note binomialTrasposition(Note n, String binTrasp) {
+        String nBin = n.getBinomial();
+        int nPC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[0]);
+        int nNC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[1]);
+        int binTraspPC = Integer.parseInt(binTrasp.substring(1, binTrasp.length()-1).split(",")[0]);
+        int binTraspNC = Integer.parseInt(binTrasp.substring(1, binTrasp.length()-1).split(",")[1]);
+        
+        int traspPC = (binTraspPC + nPC) % 12;
+        int traspNC = (binTraspNC + nNC) % 7;
+        Note n1 = new Note("<" + traspPC + "," + traspNC + ">", "binomial");
+        return n1;
+    }
+    
+    public static Note binomialInversion(Note n) {
+        String nBin = n.getBinomial();
+        int nPC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[0]);
+        int nNC = Integer.parseInt(nBin.substring(1, nBin.length()-1).split(",")[1]);
+        int invertedPC = (12 - nPC) % 12;
+        int invertedNC = (7 - nNC) % 7;
+        Note n1 = new Note("<" + invertedPC + "," + invertedNC + ">", "binomial");
+        return n1;
+    }
+    
+    public static String getHomophony(Note n) {
+        String[][] notes = {
+            {"c","c#","cx","","","","","","","","cbb","cb"},
+            {"dbb", "db", "d", "d#", "dx", "", "", "", "", "", "", ""},
+            {"", "", "ebb", "eb", "e", "e#", "ex", "", "", "", "", ""},
+            {"", "", "", "fbb", "fb", "f", "f#", "fx", "", "", "", ""},
+            {"", "", "", "", "", "gbb", "gb", "g", "g#", "gx", "", ""},
+            {"", "", "", "", "", "", "", "abb", "ab", "a", "a#", "ax"},
+            {"b#", "bx", "", "", "", "", "", "", "", "bbb", "bb", "b"}};
+        String omophony = "";
+        int pc = n.getPitchClass();
+        for(int i = 0; i < notes.length; i++) {
+            omophony += notes[i][pc];
+            if(!"".equals(notes[i][pc]) && i + 1 < notes.length)
+                omophony += ",";
+        }
+        
+        return omophony;
     }
         
 }
