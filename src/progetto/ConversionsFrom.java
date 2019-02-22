@@ -222,6 +222,7 @@ public class ConversionsFrom {
             {"", "", "", "", "", "gbb", "gb", "g", "g#", "gx", "", ""},
             {"", "", "", "", "", "", "", "abb", "ab", "a", "a#", "ax"},
             {"b#", "bx", "", "", "", "", "", "", "", "bbb", "bb", "b"}};
+
         
         String pc = nota.split(",")[0].substring(1, nota.split(",")[0].length());
         String nc = nota.split(",")[1].substring(0, nota.split(",")[1].length() - 1);

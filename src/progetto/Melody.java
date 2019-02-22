@@ -32,11 +32,46 @@ public class Melody {
     }
     
     public Note getLowestNote() {
-        return Manipulations.lowestPitchOfMelody(this);
+        if(this.getLenght() > 0) {
+            int minMidiPitch = 127;
+            for (int i = 0; i < this.getLenght(); i++) {
+                if(ConversionsTo.convertsionToMIDI(this.getNoteAt(i)) < minMidiPitch)
+                    minMidiPitch = ConversionsTo.convertsionToMIDI(this.getNoteAt(i));
+            }
+            String pitchOctave = ConversionsFrom.conversionFromMidiPitch(minMidiPitch);
+            String pitch = pitchOctave.split("/")[0];
+            int octave = 0;
+            try {
+                octave = Integer.parseInt(pitchOctave.split("/")[1]);
+            } catch (NumberFormatException e) {
+                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
+                throw new IllegalArgumentException("Valore ottava errato (" + pitchOctave.split("/")[1] + ")");
+            }
+            
+            Note n = new Note(pitch, octave);
+            return n;
+        }
+        else
+            return null;
     }
     
     public Note getHighestNote() {
-        return Manipulations.highestPitchOfMelody(this);
+        if(this.getLenght() > 0) {
+            int maxMidiPitch = 0;
+            for (int i = 0; i < this.getLenght(); i++) {
+                //String note = melody.getNoteAt(i).getNote();
+                //int octave = melody.getNoteAt(i).getOctave();
+                if(ConversionsTo.convertsionToMIDI(this.getNoteAt(i)) > maxMidiPitch)
+                    maxMidiPitch = ConversionsTo.convertsionToMIDI(this.getNoteAt(i));
+            }
+            String pitchOctave = ConversionsFrom.conversionFromMidiPitch(maxMidiPitch);
+            String pitch = pitchOctave.split("/")[0];
+            int octave = Integer.parseInt(pitchOctave.split("/")[1]);
+            Note n = new Note(pitch, octave);
+            return n;
+        }
+        else
+            return null;
     }
     
     public Note getMiddleNote() {
@@ -75,6 +110,12 @@ public class Melody {
         for(int i = 0; i < this.getLenght(); i++) {
             melody.set(i, Manipulations.ncNoteTrasposition(melody.get(i), pcTrasposition));
         } 
+    }
+    
+    public void melodyBinomialTrasposition(String binTrasposition) {
+        for(int i = 0; i < this.getLenght(); i++) {
+            melody.set(i, Manipulations.binomialTrasposition(melody.get(i), binTrasposition));
+        }
     }
     
     public int countRest() {
@@ -125,7 +166,7 @@ public class Melody {
         String str = "Melody{" + "bpm=" + bpm + ", dimensions=" + melody.size() + "}\n";
         for (Note melody1 : melody) {
             //str += "Nota: " + melody1.getNote() + ", Ottava: " +melody1.getOctave() + "\n";
-            str += melody1.toString() + "\n";
+            str += melody1.toString()+ "\n";
         }
         return str;
     }

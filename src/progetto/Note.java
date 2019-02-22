@@ -148,7 +148,21 @@ public class Note {
         n = new NoteRest(value, notationLanguage);
         //this.durata = n.getNumericDuration();
     }
-
+    
+    public int getNumerator() {
+        if(n != null)
+            return n.getNumerator();
+        else
+            return 0;
+    }
+    
+    public int getDenominator() {
+        if(n != null)
+            return n.getDenominator();
+        else
+            return 0;
+    }
+    
     @Override
     public String toString() {
         if(n != null)

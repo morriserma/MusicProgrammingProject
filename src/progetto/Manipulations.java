@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 //For example lowest, highest pitch of a melody, Note traspositions, ecc.
 public class Manipulations {
     //Method used by melody class to find the lowest pitch of melody. (Done with midiPitch)
-    public static Note lowestPitchOfMelody(Melody melody) {
+    /*public static Note lowestPitchOfMelody(Melody melody) {
         if(melody.getLenght() > 0) {
             int minMidiPitch = 127;
             for (int i = 0; i < melody.getLenght(); i++) {
@@ -48,7 +48,7 @@ public class Manipulations {
         }
         else
             return null;
-    }
+    }*/
     
     //Method used by melody class to find the middle pitch of melody. (Done with midiPitch)
     public static short pitchClassInterval(Note n1, Note n2) {
@@ -357,6 +357,10 @@ public class Manipulations {
         String note = ConversionsFrom.conversionFromBinomial("<" + pc_end + "," + nc_end + ">");
        
         Note n = new Note(note.split("/")[0]);
+        if(n.n != null) {
+            int denExp = (int) (Math.log(n.getDenominator()) / Math.log(2));
+            n1.setNoteRest(n.getNumerator(), denExp);
+        }
         return n;
     }
     
@@ -371,6 +375,10 @@ public class Manipulations {
         int traspPC = (binTraspPC + nPC) % 12;
         int traspNC = (binTraspNC + nNC) % 7;
         Note n1 = new Note("<" + traspPC + "," + traspNC + ">", "binomial");
+        if(n.n != null) {
+            int denExp = (int) (Math.log(n.getDenominator()) / Math.log(2));
+            n1.setNoteRest(n.getNumerator(), denExp);
+        }
         return n1;
     }
     
@@ -382,6 +390,10 @@ public class Manipulations {
         int invertedPC = (12 - nPC) % 12;
         int invertedNC = (7 - nNC) % 7;
         Note n1 = new Note("<" + invertedPC + "," + invertedNC + ">", "binomial");
+        if(n.n != null) {
+            int denExp = (int) (Math.log(n.getDenominator()) / Math.log(2));
+            n1.setNoteRest(n.getNumerator(), denExp);
+        }
         return n1;
     }
     

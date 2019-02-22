@@ -146,5 +146,12 @@ public class Progetto {
                 " --> " + Manipulations.intervalInversion("p4"));
         System.out.println("HighestNote:" + m2.getHighestNote() + ", LowestNote:" 
                 + m2.getLowestNote() + ", MiddleNote" + m2.getMiddleNote());
+        System.out.println("Trasposizione binomiale della melodia " + m2.toString());
+        System.out.println("di <1,1>");
+        m2.melodyBinomialTrasposition("<1,1>");
+        for (int i = 0; i < m2.getLenght(); i++) {
+            System.out.println(m2.getNoteAt(i));
+        }
+                
     }
 }
