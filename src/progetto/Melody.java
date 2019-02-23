@@ -164,9 +164,13 @@ public class Melody {
     @Override
     public String toString() {
         String str = "Melody{" + "bpm=" + bpm + ", dimensions=" + melody.size() + "}\n";
-        for (Note melody1 : melody) {
+        for (int i = 0; i < melody.size(); i++) {
+            Note n = melody.get(i);
             //str += "Nota: " + melody1.getNote() + ", Ottava: " +melody1.getOctave() + "\n";
-            str += melody1.toString()+ "\n";
+            if(i + 1 == melody.size())
+                str += n.toString();
+            else
+                str += n.toString()+ "\n";
         }
         return str;
     }

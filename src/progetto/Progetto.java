@@ -16,11 +16,19 @@ public class Progetto {
         for (int i = 0; i < m.getLenght(); i++) {
             System.out.println("Nota:" + m.getNoteAt(i).getNote());
             System.out.println("Ottava:" + m.getNoteAt(i).getOctave());
-            System.out.println(m.getNoteAt(i).getHelmholtz());
+            System.out.println("Helmholtz:" + m.getNoteAt(i).getHelmholtz());
             System.out.println("Scientifica: " + m.getNoteAt(i).getScientificNotation());
             System.out.println("Neolatina: " + m.getNoteAt(i).getNeolatinNotation());
             System.out.println("MIDI: " + m.getNoteAt(i).getMIDIPitch());
             System.out.println("Frequenza: " + m.getNoteAt(i).getFreq());
+            System.out.println("PC: " + m.getNoteAt(i).getPitchClass());
+            System.out.println("Binomial: " + m.getNoteAt(i).getBinomial());
+            System.out.println("BR: " + m.getNoteAt(i).getBR());
+            System.out.println("CBR: " + m.getNoteAt(i).getCBR());
+            System.out.println("CNC: " + m.getNoteAt(i).getContinuousNameCode());
+            System.out.println("CPC: " + m.getNoteAt(i).getContinuousPitchCode());
+            System.out.println("NC: " + m.getNoteAt(i).getNameClass());
+
             
             System.out.println("//////////////////////////////////////");
         }
@@ -52,13 +60,14 @@ public class Progetto {
                 + Manipulations.pitchClassIntervalName(Manipulations.intervalClass(n1, n2)));
         
         Note n8 = new Note("11", "Pc");
-        System.out.println("PCI 10 --> " + n8.getNote() + n8.getOctave());
+        System.out.println("PCI " + n8.getContinuousPitchCode() + " --> " + n8.getNote() + n8.getOctave());
         m.melodyPCITrasposition((short) (1));
         for(int i = 0; i < m.getLenght(); i++) {
             System.out.println("Melodia trasposta: " + m.getNoteAt(i).getNote() + "" + m.getNoteAt(i).getOctave());
         }
         Note n9 = new Note("48", "cpc");
-        System.out.println("CPC c4 --> " + n9.getContinuousPitchCode() + " --> " + n9.getNote() + "" + n9.getOctave());
+        System.out.println("CPC" + n9.getNote() + " --> " + n9.getContinuousPitchCode() + " --> " 
+                + n9.getNote() + "" + n9.getOctave());
         
         m.melodyCPCITrasposition(-1);
         for(int i = 0; i < m.getLenght(); i++) {
@@ -149,9 +158,9 @@ public class Progetto {
         System.out.println("Trasposizione binomiale della melodia " + m2.toString());
         System.out.println("di <1,1>");
         m2.melodyBinomialTrasposition("<1,1>");
-        for (int i = 0; i < m2.getLenght(); i++) {
-            System.out.println(m2.getNoteAt(i));
-        }
+
+        System.out.println(m2.toString());
+        
                 
     }
 }
