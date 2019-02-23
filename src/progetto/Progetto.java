@@ -161,6 +161,9 @@ public class Progetto {
 
         System.out.println(m2.toString());
         
+        
+        Melody m3 = Melody.randomMelody(5);
+        System.out.println("Random melody: \n" + m3.toString());
                 
     }
 }

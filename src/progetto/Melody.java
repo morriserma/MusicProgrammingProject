@@ -160,6 +160,24 @@ public class Melody {
         else
             throw new IllegalArgumentException("Valore BPM (" + getBpm()+ ") non valido");
     }
+    
+    public static Melody randomMelody(int numberOfNotes) {
+        int random = 0;
+        Melody m1 = new Melody();
+        for (int i = 0; i < numberOfNotes; i++) {
+            random = (int) Math.floor(Math.random() * 128) + 1;
+            String note = ConversionsFrom.conversionFromMidiPitch(random);
+            int octave;
+            try {
+                octave = Integer.parseInt(note.split("/")[1]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Valore ottava errato (" + note.split("/")[1] + ")");
+            }
+            Note n = new Note(note.split("/")[0], octave);
+            m1.add(n);
+        } 
+        return m1;
+    }
 
     @Override
     public String toString() {
