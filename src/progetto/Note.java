@@ -3,7 +3,6 @@ package progetto;
 public class Note {
     int octave;
     String note;
-    //double durata;
     NoteRest n;
 
 //////////////////////Constructors//////////////////////////////////////////////
@@ -99,6 +98,7 @@ public class Note {
             throw new IllegalArgumentException();
     }
     
+    ////////////////////////////////Getters and Setters//////////////////////////////////////////////
     public int getOctave() {
         return octave;
     }
@@ -115,7 +115,7 @@ public class Note {
     public void setNote(String note) {
         this.note = note;
     } 
-
+//////////////////////////////////////////////Note Duration methods//////////////////////////////////////////
     private NoteRest getNoteRest() {
         if(n == null)
             return new NoteRest(0);
@@ -134,6 +134,7 @@ public class Note {
         return n.getNumericDuration();
     }
 
+    //Set NoteRest methods instantiate a NoteRest object with informations about notes durations
     public void setNoteRest(int exp) {
         n = new NoteRest(exp);
         //this.durata = n.getNumericDuration();
@@ -175,7 +176,7 @@ public class Note {
     
     
 
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////Conversions///////////////////////////////////////////
     public String getHelmholtz() {
         return ConversionsTo.conversionToHelm(this);
     }

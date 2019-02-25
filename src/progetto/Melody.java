@@ -31,6 +31,7 @@ public class Melody {
         melody.clear();
     }
     
+    //Method to calc the lowest pitch of a melody converting it's note to midi
     public Note getLowestNote() {
         if(this.getLenght() > 0) {
             int minMidiPitch = 127;
@@ -55,6 +56,7 @@ public class Melody {
             return null;
     }
     
+    //Method to calc the highest pitch of a melody converting it's note to midi
     public Note getHighestNote() {
         if(this.getLenght() > 0) {
             int maxMidiPitch = 0;
@@ -74,6 +76,8 @@ public class Melody {
             return null;
     }
     
+    //Method to calc the middle pitch (note at same distance from lowest and highest) 
+    //of a melody converting it's note to midi
     public Note getMiddleNote() {
         Note highest = getHighestNote();
         Note lowest = getLowestNote();
@@ -94,6 +98,8 @@ public class Melody {
         return n;
     }
     
+    //Methods to calculate the transposition (in different notation) of the melody by calling Manipulations.pcNoteTrasposition
+    //for each note
     public void melodyPCITrasposition(short pcTrasposition) {
         for(int i = 0; i < this.getLenght(); i++) {
             melody.set(i, Manipulations.pcNoteTrasposition(melody.get(i), pcTrasposition));    
@@ -118,6 +124,13 @@ public class Melody {
         }
     }
     
+    public void melodyCBRDiatonicTrasposition(String cbrTrasposition) {
+        for(int i = 0; i < this.getLenght(); i++) {
+            melody.set(i, Manipulations.cbrDiatonicTrasposition(melody.get(i), cbrTrasposition));
+        }
+    }
+    
+    //Method to count the number of rest in the melody
     public int countRest() {
         int cont = 0;
         for(int i = 0; i < this.getLenght(); i++) {
@@ -127,6 +140,7 @@ public class Melody {
         return cont;
     }
     
+    //Method to count the number of note in the melody
     public int countNotes() {
        int cont = 0;
         for(int i = 0; i < this.getLenght(); i++) {
@@ -144,6 +158,7 @@ public class Melody {
         this.bpm = bpm;
     }
     
+    //Method to calc the time of a melody considering bpm and note/pause duration
     public BigDecimal melodyTime() {
         if(getBpm() > 0) {
             double pulseForSecond = (double)60 / getBpm();
@@ -161,6 +176,7 @@ public class Melody {
             throw new IllegalArgumentException("Valore BPM (" + getBpm()+ ") non valido");
     }
     
+    //Method that build a random melody from midiPitch
     public static Melody randomMelody(int numberOfNotes) {
         int random;
         Melody m1 = new Melody();

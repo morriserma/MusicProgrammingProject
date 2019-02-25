@@ -155,15 +155,19 @@ public class Progetto {
                 " --> " + Manipulations.intervalInversion("p4"));
         System.out.println("HighestNote:" + m2.getHighestNote() + ", LowestNote:" 
                 + m2.getLowestNote() + ", MiddleNote" + m2.getMiddleNote());
+        System.out.println("//////////////////////////////////////////////////");
         System.out.println("Trasposizione binomiale della melodia " + m2.toString());
         System.out.println("di <1,1>");
         m2.melodyBinomialTrasposition("<1,1>");
 
         System.out.println(m2.toString());
         
-        
+        System.out.println("//////////////////////////////////////////////////");
         Melody m3 = Melody.randomMelody(5);
         System.out.println("Random melody: \n" + m3.toString());
-                
+        
+        System.out.println("//////////////////////////////////////////////////");
+        m2.melodyCBRDiatonicTrasposition("4");
+        System.out.println("Melody m2 cbr trasposition:\n" + m2.toString());
     }
 }

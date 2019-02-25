@@ -380,5 +380,48 @@ public class Manipulations {
         
         return omophony;
     }
+    
+    public static Note cbrDiatonicTrasposition(Note n, String cbrTrasp) {
+        int cbr;
+        try {
+            cbr = Integer.parseInt(cbrTrasp);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Valore cbr errato (" + cbrTrasp + ")");
+        }
+        
+        int[] halftoneOffset = {0, 2, 4, 5, 7, 9, 11};
+        // calcolo dell'ottava
+        int newOctave = n.getOctave() + cbr / 7;
+        // calcolo della trasposizione a meno delle ottave
+        int currentAmount = cbr - 7 * (cbr / 7);
+        // calcolo dell'nc
+        int currentNc = n.getNameClass();
+        // calcolo del nuovo NC a meno delle ottave
+        int newNc = currentNc + currentAmount;
+        // oltre i limiti 0..7: ricalcolo NC e modifica nuova ottava
+        if (newNc > 6) {
+            newNc -= 7;
+            newOctave++;
+        } else if (newNc < 0) {
+            newNc += 7;
+            newOctave--;
+        }
+        // calcolo del pc
+        int currentPc = n.getPitchClass();
+        // spiazzamento rispetto alla nota naturale originale + spiazzamento nuova nota naturale
+        int newPc = currentPc - halftoneOffset[currentNc] + halftoneOffset[newNc];
+        // oltre i limiti 0..11: ricalcolo PC
+        if (newPc > 11)
+            newPc -= 12;
+        else if (newPc < 0)
+            newPc += 12;
+        // ricostruzione del valore cbr
+        Note n1 = new Note("" + (newOctave * 1000 + newPc * 10 + newNc), "cbr");
+        if(n.n != null) {
+            int denExp = (int) (Math.log(n.getDenominator()) / Math.log(2));
+            n1.setNoteRest(n.getNumerator(), denExp);
+        }
+        return n1;
+    }
         
 }
