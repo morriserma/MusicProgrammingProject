@@ -49,11 +49,15 @@ public class ConversionsFrom {
     //Conversion from Midi rappresentation
     public static String conversionFromMidiPitch(int midiPitch) {
         String[] notes = {"c", "c#", "d", "eb", "e", "f", "f#", "g", "g#", "a", "bb", "b"};
-        String pitch = notes[midiPitch % 12];
-        int octave = midiPitch / 12 - 1;
-        String pitchOctave = pitch + "/" + octave;
-        String[] parts = pitchOctave.split("/");
-        return parts[0] + "/" + parts[1];
+        if(midiPitch >= 0 && midiPitch <= 127) {
+            String pitch = notes[midiPitch % 12];
+            int octave = midiPitch / 12 - 1;
+            String pitchOctave = pitch + "/" + octave;
+            String[] parts = pitchOctave.split("/");
+            return parts[0] + "/" + parts[1];
+        }
+        else
+            throw new IllegalArgumentException("Valore Midi (" + midiPitch + ") non valido");
     }
     
     //Conversion from Helmholtz rappresentation
@@ -101,13 +105,13 @@ public class ConversionsFrom {
         try {
             freq = Double.parseDouble(nota.replace(",","."));
         } catch (NumberFormatException e) {
-            System.out.println("Valore della frequenza errato (" + nota.replace(",",".") + ")");
-            System.exit(1);
+            throw new IllegalArgumentException("Valore della frequenza errato (" + nota.replace(",",".") + ")");
         }
         if(freq > 16.351597 && freq < 31608.527)
             midiPitch = (int) (69 + 12*(Math.log(freq / 440)) / Math.log(2));
         else
-             throw new IllegalArgumentException();
+             throw new IllegalArgumentException("Valore in Hz della nota inserita "
+                     + "(" + nota + ") esce al range gestito (16.351597 - 31608.527)");
         
         return  conversionFromMidiPitch(midiPitch);
     }
@@ -121,7 +125,7 @@ public class ConversionsFrom {
         String p = pitch.toLowerCase();
         boolean b = false;
    
-        if (octave >= 0 && octave <=10) {
+        if (octave >= -1 && octave <=10) {
             int i = 0;
             int j = 0;
             while (i < notes.length && b == false) {

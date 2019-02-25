@@ -5,51 +5,7 @@ import java.math.BigDecimal;
 //Class that manage some type of Note manipulations that aren't converstions.
 //For example lowest, highest pitch of a melody, Note traspositions, ecc.
 public class Manipulations {
-    //Method used by melody class to find the lowest pitch of melody. (Done with midiPitch)
-    /*public static Note lowestPitchOfMelody(Melody melody) {
-        if(melody.getLenght() > 0) {
-            int minMidiPitch = 127;
-            for (int i = 0; i < melody.getLenght(); i++) {
-                if(ConversionsTo.convertsionToMIDI(melody.getNoteAt(i)) < minMidiPitch)
-                    minMidiPitch = ConversionsTo.convertsionToMIDI(melody.getNoteAt(i));
-            }
-            String pitchOctave = ConversionsFrom.conversionFromMidiPitch(minMidiPitch);
-            String pitch = pitchOctave.split("/")[0];
-            int octave = 0;
-            try {
-                octave = Integer.parseInt(pitchOctave.split("/")[1]);
-            } catch (NumberFormatException e) {
-                //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
-                throw new IllegalArgumentException("Valore ottava errato (" + pitchOctave.split("/")[1] + ")");
-            }
-            
-            Note n = new Note(pitch, octave);
-            return n;
-        }
-        else
-            return null;
-    }
-    
-    //Method used by melody class to find the highest pitch of melody. (Done with midiPitch)
-    public static Note highestPitchOfMelody(Melody melody) {
-        if(melody.getLenght() > 0) {
-            int maxMidiPitch = 0;
-            for (int i = 0; i < melody.getLenght(); i++) {
-                //String note = melody.getNoteAt(i).getNote();
-                //int octave = melody.getNoteAt(i).getOctave();
-                if(ConversionsTo.convertsionToMIDI(melody.getNoteAt(i)) > maxMidiPitch)
-                    maxMidiPitch = ConversionsTo.convertsionToMIDI(melody.getNoteAt(i));
-            }
-            String pitchOctave = ConversionsFrom.conversionFromMidiPitch(maxMidiPitch);
-            String pitch = pitchOctave.split("/")[0];
-            int octave = Integer.parseInt(pitchOctave.split("/")[1]);
-            Note n = new Note(pitch, octave);
-            return n;
-        }
-        else
-            return null;
-    }*/
-    
+        
     //Method used by melody class to find the middle pitch of melody. (Done with midiPitch)
     public static short pitchClassInterval(Note n1, Note n2) {
         String[] notes = {"c/b#/dbb", "c#/db/bx/b##", "d/cx/c##/ebb", "d#/eb/fbb", "e/dx/d##/fb",
@@ -59,6 +15,7 @@ public class Manipulations {
         String pitch2 = n2.getNote();
         short i = 0;
         boolean check = false;
+        //Pc is the index of notes array where oneNote[j].equals(pitch1)
         while(i < notes.length && check == false) {
             String[] oneNote = notes[i].split("/");
             int j = 0;
@@ -174,7 +131,6 @@ public class Manipulations {
         try {
             octave = Integer.parseInt(traspPitch.split("/")[1]);
         } catch (NumberFormatException e) {
-            //System.out.println("Valore Continuous Pitch Class errato (" + nota + ")");
             throw new IllegalArgumentException("Valore ottava errato (" + traspPitch.split("/")[1] + ")");
         }
         n.setOctave(octave);
@@ -262,6 +218,7 @@ public class Manipulations {
     }
     
     //Method used to calculate binomial interval between 2 notes
+    //PC and NC rapresents the column the row of the matrix
     public static String binomialInterval(Note n1, Note n2) {
         String[][] br_intervals = {
             {"P1", "A1", "2A1", "3A1", "4A1", "5A1", "6A1", "5d1", "4d1", "3d1", "2d1", "d1"},
@@ -312,6 +269,9 @@ public class Manipulations {
                 nc++;
             
         }
+       
+        if(check == false)
+            throw new IllegalArgumentException("Intervallo inserito (" + interval + ") non valido");
 
         int invertedPC = (12 - pc) % 12;
         int invertedNC = (7 - nc) % 7;
@@ -348,6 +308,9 @@ public class Manipulations {
             if(check == false)
                 i++;       
         }
+        
+        if(check == false)
+            throw new IllegalArgumentException("Intervallo inserito (" + interval + ") non valido");
         
         int pcNoteInterval = j;
         int ncNoteInterval = i;

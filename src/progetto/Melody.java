@@ -162,10 +162,10 @@ public class Melody {
     }
     
     public static Melody randomMelody(int numberOfNotes) {
-        int random = 0;
+        int random;
         Melody m1 = new Melody();
         for (int i = 0; i < numberOfNotes; i++) {
-            random = (int) Math.floor(Math.random() * 128) + 1;
+            random = (int) Math.floor(Math.random() * 127) + 1;
             String note = ConversionsFrom.conversionFromMidiPitch(random);
             int octave;
             try {
